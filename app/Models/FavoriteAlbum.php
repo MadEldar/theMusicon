@@ -4,21 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArtistFollower extends Model
+class FavoriteAlbum extends Model
 {
     public $timestamps = false;
-
-    protected $table = 'artist_followers';
+    protected $table = 'favorite_albums';
     protected $fillable = [
         'user_id',
-        'artist_id'
+        'album_id'
     ];
-
-    public function Artist() {
-        return $this->belongsTo('\App\Artist');
-    }
 
     public function User() {
         return $this->belongsTo('\App\User');
+    }
+
+    public function Album() {
+        return $this->belongsTo('\App\Album');
     }
 }

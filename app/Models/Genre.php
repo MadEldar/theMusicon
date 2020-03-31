@@ -23,4 +23,8 @@ class Genre extends Model
     public function Songs() {
         return $this->hasMany('\App\Song');
     }
+
+    public function FollowCount() {
+        return GenreFollower::where('genre_id', $this->id)->count();
+    }
 }

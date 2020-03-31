@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
+Route::get('/admin', fn() => redirect('/admin/home'));
+Route::get('/admin/home', function () {
     return view('admin/index');
 });
 Route::get('/home', function () {

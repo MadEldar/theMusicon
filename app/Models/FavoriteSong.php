@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlaylistSong extends Model
+class FavoriteSong extends Model
 {
     public $timestamps = false;
-    protected $table = 'playlist_songs';
+    protected $table = 'favorite_songs';
     protected $fillable = [
-        'playlist_id',
+        'user_id',
         'song_id'
     ];
 
-    public function Playlist() {
-        return $this->belongsTo('\App\Playlist');
+    public function User() {
+        return $this->belongsTo('\App\User');
     }
 
     public function Song() {
