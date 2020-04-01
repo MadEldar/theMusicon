@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
     public function home(){
-        return view('musicon/index');
+        return view('musicon/albums');
     }
     public function albums(){
         return view('musicon/albums');
