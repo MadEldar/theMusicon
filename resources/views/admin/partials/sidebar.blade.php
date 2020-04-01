@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/home/admin')}}">
+            <a class="nav-link" href="{{url('/administrator')}}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -29,9 +29,9 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Page 1 </a></li>
-                    <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Page 2 </a></li>
-                    <li class="nav-item"><a class="nav-link" href="pages/samples/register.html"> Page 3 </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/artist')}}"> Artist </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/albums')}}"> Albums </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/song')}}"> Song </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> Page 4 </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> Page 5 </a></li>
                 </ul>
