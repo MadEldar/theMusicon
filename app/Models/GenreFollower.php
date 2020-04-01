@@ -4,18 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArtistFollower extends Model
+class GenreFollower extends Model
 {
     public $timestamps = false;
-
-    protected $table = 'artist_followers';
+    protected $table = 'genre_followers';
     protected $fillable = [
-        'user_id',
-        'artist_id'
+        'genre_id',
+        'user_id'
     ];
 
-    public function Artist() {
-        return $this->belongsTo('\App\Artist');
+    public function Genre() {
+        return $this->belongsTo('\App\Genre');
     }
 
     public function User() {
