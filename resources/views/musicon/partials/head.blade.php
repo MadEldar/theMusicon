@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- Title -->
-    <title>One Music - Modern Music HTML5 Template</title>
+    <title>The Musicon - Music For All</title>
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{{asset('musicon/img/core-img/favicon.ico')}}">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,500,500i,600,600i,700,700i">
     <link rel="stylesheet" href="{{ asset('musicon/css/bootstrap.min.css') }}">
