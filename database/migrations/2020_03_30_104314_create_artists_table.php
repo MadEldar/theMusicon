@@ -21,6 +21,7 @@ class CreateArtistsTable extends Migration
             $table->unsignedInteger('genre_id');
             $table->timestamp('career_start');
             $table->timestamp('career_end')->nullable();
+            $table->string('spotify_id');
             $table->timestamps();
             $table->foreign('genre_id')->references('id')->on('genres');
         });

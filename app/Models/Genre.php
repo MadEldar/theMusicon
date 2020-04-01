@@ -12,6 +12,11 @@ class Genre extends Model
         'genre_status'
     ];
 
+    const genreStatus = [
+        0 => 'Disabled',
+        1 => 'Active'
+    ];
+
     public function Artists() {
         return $this->hasMany('\App\Artist');
     }

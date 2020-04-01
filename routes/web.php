@@ -20,3 +20,4 @@ Route::get('/admin/home', function () {
 Route::get('/home', function () {
     return view('musicon/index');
 });
+Route::get('/api-test', 'MusiconController@search');

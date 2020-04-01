@@ -12,6 +12,7 @@ class Album extends Model
         'genre_id',
         'artist_id',
         'album_status',
+        'album_thumbnail',
         'previous_status',
         'release_date'
     ];
