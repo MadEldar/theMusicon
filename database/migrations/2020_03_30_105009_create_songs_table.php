@@ -16,13 +16,14 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('song_name');
+            $table->string('song_lyrics');
             $table->unsignedInteger('genre_id');
             $table->unsignedBigInteger('artist_id');
             $table->unsignedBigInteger('album_id');
             $table->unsignedTinyInteger('song_ordinal');
             $table->unsignedTinyInteger('song_status')->default(1);
             $table->unsignedTinyInteger('previous_status')->nullable();
-            $table->string('song_thumbnail');
+            $table->string('spotify_id');
             $table->timestamp('release_date');
             $table->timestamps();
             $table->foreign('artist_id')->references('id')->on('artists');

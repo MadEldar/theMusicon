@@ -21,6 +21,8 @@ class CreateAlbumsTable extends Migration
             $table->unsignedTinyInteger('album_status')->default(1);
             $table->unsignedTinyInteger('previous_status')->nullable();
             $table->timestamp('release_date');
+            $table->string('album_thumbnail');
+            $table->string('spotify_id');
             $table->timestamps();
             $table->foreign('genre_id')->references('id')->on('genres');
             $table->foreign('artist_id')->references('id')->on('artists');

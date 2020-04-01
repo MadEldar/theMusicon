@@ -28,6 +28,6 @@ class Artist extends Model
     }
 
     public function FollowCount() {
-        return $this->withCount('');
+        return ArtistFollower::where('artist_id', $this->id)->count();
     }
 }

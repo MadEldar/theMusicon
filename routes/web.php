@@ -25,4 +25,11 @@ Route::get('/register', 'WebController@register');
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
 
-
+Route::get('/admin', fn() => redirect('/admin/home'));
+Route::get('/admin/home', function () {
+    return view('admin/index');
+});
+Route::get('/home', function () {
+    return view('musicon/index');
+});
+Route::get('/api-test', 'MusiconController@search');
