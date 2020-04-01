@@ -8,14 +8,14 @@
     <!-- ##### Header Area Start ##### -->
     @include('musicon/partials/preloader')
     <!-- ##### Header Area End ##### -->
-
+    @include('musicon/partials/header')
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
         <div class="hero-slides owl-carousel">
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: {{ url('musicon/img/bg-img/bg-1.jpg') }};"></div>
+                <div class="slide-img bg-img" style="background-image: url('musicon/img/bg-img/bg-1.jpg');"></div>
                 <!-- Slide Content -->
                 <div class="container">
                     <div class="row">
@@ -33,7 +33,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: {{ url('musicon/img/bg-img/bg-2.jpg') }};"></div>
+                <div class="slide-img bg-img" style="background-image: url('musicon/img/bg-img/bg-2.jpg');  "></div>
                 <!-- Slide Content -->
                 <div class="container">
                     <div class="row">
@@ -41,7 +41,7 @@
                             <div class="hero-slides-content text-center">
                                 <h6 data-animation="fadeInUp" data-delay="100ms">Latest album</h6>
                                 <h2 data-animation="fadeInUp" data-delay="300ms">Colorlib Music <span>Colorlib Music</span></h2>
-                                <a data-animation="fadeInUp" data-delay="500ms" href="#" class="btn oneMusic-btn mt-50">Discover adssadsad<i class="fa fa-angle-double-right"></i></a>
+                                <a data-animation="fadeInUp" data-delay="500ms" href="#" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-9">
                     <div class="ablums-text text-center mb-70">
-                        <p> fringilla nec non lacus. Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
+                        <p>Nam tristique ex vel magna tincidunt, ut porta nisl finibus. Vivamus eu dolor eu quam varius rutrum. Fusce nec justo id sem aliquam fringilla nec non lacus. Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
                     </div>
                 </div>
             </div>
@@ -388,7 +388,7 @@
     <!-- ##### Buy Now Area End ##### -->
 
     <!-- ##### Featured Artist Area Start ##### -->
-    <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:{{ url('musicon/img/bg-img/bg-4.jpg') }};">
+    <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:url('musicon/img/bg-img/bg-4.jpg');">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-12 col-md-5 col-lg-4">

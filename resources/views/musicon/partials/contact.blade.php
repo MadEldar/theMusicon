@@ -1,4 +1,4 @@
-<section class="contact-area section-padding-100 bg-img bg-overlay bg-fixed has-bg-img" style="background-image: {{ url('img/bg-img/bg-2.jpg') }};">
+<section class="contact-area section-padding-100 bg-img bg-overlay bg-fixed has-bg-img" style="background-image: url('musicon/img/bg-img/bg-2.jpg');">
     <div class="container">
         <div class="row">
             <div class="col-12">

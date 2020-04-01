@@ -393,7 +393,7 @@ img {
     right: 50px;
     text-align: center;
     width: 40px;
-    @include trans-duration(500ms);
+    @include trans-duration(250ms);
     box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.15);
     @media #{$breakpoint-xs} {
         right: 30px;
