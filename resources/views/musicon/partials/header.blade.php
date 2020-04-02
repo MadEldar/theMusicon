@@ -8,6 +8,7 @@
 
                     <!-- Nav brand -->
                     <ul >
+                        <img src="{{ asset('/img/core-img/musicon-logo') }}" alt="">
                         <li><a href="{{url('/')}}" style="color: #23AF92; font-size: 20px; font-weight:bold ;">The Musicon</a></li>
                     </ul>
                     <!-- Navbar Toggler -->
@@ -39,8 +40,8 @@
                                         <li><a href="{{url('/news')}}">News</a></li>
                                         <li><a href="{{url('/contacts')}}">Contact</a></li>
                                         <li><a href="{{url('/elements')}}">Elements</a></li>
-                                        <li><a href="{{url('/login')}}" style="color: #23AF92">Login</a></li>
-                                        <li><a href="{{url('/register')}}" style="color: #23AF92">Register</a></li>
+                                        <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
+                                        <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -49,8 +50,8 @@
                             <div class="login-register-cart-button d-flex align-items-center">
                                 <!-- Login/Register -->
                                 <div class="login-register-btn mr-50">
-                                    <a href="{{url('/login')}}" id="loginBtn" style="color: #23AF92">Login /</a>
-                                    <a href="{{url('/register')}}" id="loginBtn" style="color: #23AF92">Register</a>
+                                    <span><a href="{{url('/sign-in')}}" id="loginBtn" style="color: #23AF92">Sign in /</a></span>
+                                    <span><a href="{{url('/sign-up')}}" id="loginBtn" style="color: #23AF92">Sign up</a></span>
                                 </div>
                             </div>
                         </div>

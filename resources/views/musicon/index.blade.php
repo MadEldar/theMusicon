@@ -2,14 +2,15 @@
 <html lang="en">
 @include('musicon/partials/head')
 <body>
+    <!-- Message -->
+    @include('musicon/partials/message')
+
     <!-- Preloader -->
     @include('musicon/partials/preloader')
 
     <!-- ##### Header Area Start ##### -->
-    @include('musicon/partials/preloader')
-    <!-- ##### Header Area End ##### -->
     @include('musicon/partials/header')
-    <!-- ##### Hero Area Start ##### -->
+
     <section class="hero-area">
         <div class="hero-slides owl-carousel">
             <!-- Single Hero Slide -->

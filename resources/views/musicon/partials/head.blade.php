@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- Title -->
-    <title>The Musicon - Music For All</title>
+    <title>{{ $title }}</title>
     <!-- Favicon -->
     <link rel="icon" href="{{asset('musicon/img/core-img/favicon.ico')}}">
     <!-- Stylesheet -->

@@ -13,6 +13,28 @@ class Spotify extends Model
         'track'
     ];
 
+    const scopes = [
+        'uiu' => 'ugc-image-upload',
+        'urps' => 'user-read-playback-state',
+        'umps' => 'user-modify-playback-state',
+        'urcp' => 'user-read-currently-playing',
+        'stream' => 'streaming',
+        'arc' => 'app-remote-control',
+        'ure' => 'user-read-email',
+        'urp' => 'user-read-private',
+        'prc' => 'playlist-read-collaborative',
+        'pmPublic' => 'playlist-modify-public',
+        'prp' => 'playlist-read-private',
+        'pmPrivate' => 'playlist-modify-private',
+        'ulm' => 'user-library-modify',
+        'ulr' => 'user-library-read',
+        'utr' => 'user-top-read',
+        'urpp' => 'user-read-playback-position',
+        'urrp' => 'user-read-recently-played',
+        'ufr' => 'user-follow-read',
+        'ufm' => 'user-follow-modify',
+    ];
+
     private static function get_access_token() {
         $client_id = 'acce4313959e4859affc19f105c6acdf';
         $client_secret = '1a28ed102e824cb384499fe06e770ab8';

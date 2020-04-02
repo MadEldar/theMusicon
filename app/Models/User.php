@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,9 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name',
+        'first_name',
+        'last_name',
         'user_role',
-        'username',
         'user_email',
         'user_status',
         'previous_status',
@@ -47,6 +46,12 @@ class User extends Authenticatable
     const roles = [
         0 => 'Admin',
         1 => 'User'
+    ];
+
+    const status = [
+        0 => 'Deactivated',
+        1 => 'Pending',
+        2 => 'Verified'
     ];
 
     public function FavoriteAlbums() {

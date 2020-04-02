@@ -12,24 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// home
+//Home
 Route::get('/', 'WebController@home');
 Route::get('/albums', 'WebController@albums');
 Route::get('/events', 'WebController@events');
 Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
-Route::get('/login', 'WebController@login');
-Route::get('/register', 'WebController@register');
-//admin
+Route::get('/sign-in', 'WebController@sign_in_view');
+Route::get('/sign-up', 'WebController@sign_up_view');
+Route::post('/sign-up', 'WebController@sign_up');
+
+//Admin
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
 
-Route::get('/admin', fn() => redirect('/admin/home'));
-Route::get('/admin/home', function () {
-    return view('admin/index');
-});
-Route::get('/home', function () {
-    return view('musicon/index');
-});
+//Experiments
 Route::get('/api-test', 'MusiconController@search');

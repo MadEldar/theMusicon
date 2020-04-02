@@ -2,19 +2,20 @@
 <html lang="en">
 @include('musicon/partials/head')
 <body>
+    <!-- Message -->
+    @include('musicon/partials/message')
+
     <!-- Preloader -->
     @include('musicon/partials/preloader')
 
     <!-- ##### Header Area Start ##### -->
-    @include('musicon/partials/preloader')
-    <!-- ##### Header Area End ##### -->
     @include('musicon/partials/header')
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcumb3.jpg');">
-        <div class="bradcumbContent">
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb3.jpg');">
+        <div class="breadcrumbContent">
             <p>See what’s new</p>
-            <h2>Login</h2>
+            <h2>Sign in</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
@@ -37,10 +38,9 @@
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
-                                <button type="submit" class="btn oneMusic-btn mt-30">Login</button>
+                                <button type="submit" class="btn oneMusic-btn mt-30">Sign in</button>
                             </form>
-                            <button type="submit" class="btn oneMusic-btn mt-30 "><a href="{{url('/register')}}">Register</a></button>
-
+                            <a class="btn oneMusic-btn mt-30 " href="{{url('/sign-up')}}">Sign up</a>
                         </div>
                     </div>
                 </div>
