@@ -20,8 +20,10 @@ Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
 Route::get('/sign-in', 'WebController@sign_in_view');
+Route::post('/sign-in', 'WebController@sign_in');
 Route::get('/sign-up', 'WebController@sign_up_view');
 Route::post('/sign-up', 'WebController@sign_up');
+Route::get('/verify/{token}', 'WebController@verify');
 
 //Admin
 Route::get('/administrator', 'AdminController@admin');

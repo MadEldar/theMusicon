@@ -34,18 +34,18 @@
                                 <div class="form-group">
                                     <label for="emailField">Email address</label>
                                     <input type="email" name="user_email" class="form-control" id="emailField"
-                                           aria-describedby="emailHelp" placeholder="Enter E-mail" value="{{ old('user_email') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('user_email') }}">
                                     <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group col-6 pl-0 float-left">
                                     <label for="firstNameField">First name</label>
                                     <input type="text" name="first_name" class="form-control" id="firstNameField"
-                                           aria-describedby="emailHelp" placeholder="Enter first name" value="{{ old('user_email') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter first name" value="{{ old('first_name') }}">
                                 </div>
                                 <div class="form-group col-6 pr-0 float-left">
                                     <label for="lastNameField">Last name</label>
                                     <input type="text" name="last_name" class="form-control" id="lastNameField"
-                                           aria-describedby="emailHelp" placeholder="Enter last name" value="{{ old('user_email') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter last name" value="{{ old('last_name') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="passwordField">Password</label>
@@ -57,7 +57,7 @@
                                 </div>
                                 <button type="submit" class="btn oneMusic-btn mt-30">Sign up</button>
                             </form>
-                            <a type="submit" class="btn oneMusic-btn mt-30 " href="{{ url('/login') }}">Sign in</a>
+                            <a type="submit" class="btn oneMusic-btn mt-30 " href="{{ url('/sign-in') }}">Sign in</a>
                         </div>
                     </div>
                 </div>

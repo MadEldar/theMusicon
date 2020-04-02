@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\SignInRequest;
+use App\Http\Requests\SignUpRequest;
 use App\Mail\VerifyEmail;
 use App\Token;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -54,6 +56,17 @@ class WebController extends Controller
             'message' => Session::get('message') ?? null
         ]);
     }
+
+    public function sign_in(SignInRequest $req) {
+        $req->validate([]);
+        $user = User::where('user_email', $req->get('user_email'))->first();
+        Auth::login($user);
+        return redirect('/')->with('message', [
+            'type' => 'success',
+            'content' => "Welcome back, $user->first_name"
+        ]);
+    }
+
     public function sign_up_view() {
         return view('musicon/sign-up', [
             'title' => 'Sign up | The Musicon',
@@ -61,7 +74,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function sign_up(UserCreateRequest $req) {
+    public function sign_up(SignUpRequest $req) {
         $req->validate([]);
         $user = User::create([
             'user_email' => $req->get('user_email'),
@@ -79,5 +92,24 @@ class WebController extends Controller
             'content' => 'Complete your registration by confirming your email',
             'type' => 'success'
         ]);
+    }
+
+    public function verify($token) {
+        $db_token = Token::where('token', $token)->first();
+        if (isset($db_token) && $db_token->usage == 0) {
+            $user = User::find($db_token->user_id)->update(['user_status' => 2]);
+            Token::find($db_token->id)->delete();
+            return redirect('/sign-in')
+                ->with('message', [
+                'type' => 'success',
+                'content' => 'User verification suceeded'
+            ]);
+        } else if (isset($db_token) && $db_token->usage != 0) {
+            return redirect('/sign-in')
+                ->withErrors(['wrong_token' => 'Token has no effect']);
+        } else {
+            return redirect('/sign-in')
+                ->withErrors(['wrong_token' => 'Cannot find token or token has already been used']);
+        }
     }
 }

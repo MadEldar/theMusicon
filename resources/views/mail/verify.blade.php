@@ -353,7 +353,7 @@
                                                                 style="padding:0;Margin:0;padding-left:15px;font-size:0;">
                                                                 <a href="{{ url('/') }}" target="_blank"
                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#666666;"><img
-                                                                        src="{{ asset('/musicon/img/core-img/musicon-logo') }}"
+                                                                        src="{{ asset('/musicon/img/core-img/musicon-logo.png') }}"
                                                                         alt="Musicon logo" title="Musicon logo"
                                                                         width="130"
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a>
@@ -429,7 +429,7 @@
                                                                         src="{{ asset('musicon/img/bg-img/breadcrumb.jpg') }}"
                                                                         alt="Musicon background"
                                                                         title="Musicon background" width="600"
-                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-height: 225px;object-fit: cover;"></a>
+                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-height:225px;object-fit:cover;"></a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -540,7 +540,7 @@
                                                                 style="padding:0;Margin:0;padding-bottom:5px;padding-left:15px;font-size:0;">
                                                                 <a href="{{ url('/') }}" target="_blank"
                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:11px;text-decoration:underline;color:#666666;"><img
-                                                                        src="{{ asset('/musicon/img/core-img/musicon-logo') }}"
+                                                                        src="{{ asset('/musicon/img/core-img/musicon-logo.png') }}"
                                                                         alt="Musicon logo" title="Musicon logo"
                                                                         width="105"
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a>

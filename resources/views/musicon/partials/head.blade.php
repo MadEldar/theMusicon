@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
