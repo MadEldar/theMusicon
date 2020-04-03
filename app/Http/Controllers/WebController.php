@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Mail\VerifyEmail;
+use App\Spotify;
 use App\Token;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ use Illuminate\Support\Str;
 class WebController extends Controller
 {
     public function home() {
+//        dd(Spotify::new_albums());
         return view('musicon/index', [
             'title' => 'Home | The Musicon',
             'message' => Session::get('message') ?? null

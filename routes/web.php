@@ -28,6 +28,3 @@ Route::get('/verify/{token}', 'WebController@verify');
 //Admin
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
-
-//Experiments
-Route::get('/api-test', 'MusiconController@search');
