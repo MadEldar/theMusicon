@@ -24,6 +24,10 @@ Route::get('/register', 'WebController@register');
 //admin
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
+Route::get('/administrator/artist', 'AdminController@artist');
+Route::get('/administrator/albums', 'AdminController@albums');
+Route::get('/administrator/song', 'AdminController@song');
+
 
 Route::get('/admin', fn() => redirect('/admin/home'));
 Route::get('/admin/home', function () {
