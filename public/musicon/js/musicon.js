@@ -20,3 +20,5 @@ $('#alert-container').on('mousein', '.alert', () => {
 $('#alert-container').on('mouseout', '.alert', () => {
     removeInterval = setInterval(removeMessage, 4500);
 });
+
+/*============================= Spotify =============================*/

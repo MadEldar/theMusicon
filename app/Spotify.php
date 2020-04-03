@@ -6,34 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Spotify extends Model
 {
-    const search_types = [
+    private const search_types = [
         'album',
         'artist',
         'playlist',
         'track'
     ];
-    const scopes = [
-        'uiu' => 'ugc-image-upload',
-        'urps' => 'user-read-playback-state',
-        'umps' => 'user-modify-playback-state',
-        'urcp' => 'user-read-currently-playing',
-        'stream' => 'streaming',
-        'arc' => 'app-remote-control',
-        'ure' => 'user-read-email',
-        'urp' => 'user-read-private',
-        'prc' => 'playlist-read-collaborative',
-        'pmPublic' => 'playlist-modify-public',
-        'prp' => 'playlist-read-private',
+    private const scopes = [
+        'arc'       => 'app-remote-control',
         'pmPrivate' => 'playlist-modify-private',
-        'ulm' => 'user-library-modify',
-        'ulr' => 'user-library-read',
-        'utr' => 'user-top-read',
-        'urpp' => 'user-read-playback-position',
-        'urrp' => 'user-read-recently-played',
-        'ufr' => 'user-follow-read',
-        'ufm' => 'user-follow-modify',
+        'pmPublic'  => 'playlist-modify-public',
+        'prc'       => 'playlist-read-collaborative',
+        'prp'       => 'playlist-read-private',
+        'stream'    => 'streaming',
+        'ufm'       => 'user-follow-modify',
+        'ufr'       => 'user-follow-read',
+        'uiu'       => 'ugc-image-upload',
+        'ulm'       => 'user-library-modify',
+        'ulr'       => 'user-library-read',
+        'umps'      => 'user-modify-playback-state',
+        'urcp'      => 'user-read-currently-playing',
+        'ure'       => 'user-read-email',
+        'urp'       => 'user-read-private',
+        'urpp'      => 'user-read-playback-position',
+        'urps'      => 'user-read-playback-state',
+        'urrp'      => 'user-read-recently-played',
+        'utr'       => 'user-top-read',
     ];
-    const seeds = [
+    private const seeds = [
         'artists' => [
             '2xvW7dgL1640K8exTcRMS4',
             '6M2wZ9GZgrQXHCFfjv46we',
@@ -50,12 +50,26 @@ class Spotify extends Model
         ]
     ];
 
-    private static function get_access_token() {
+    /**
+     * @param $scopes array Array of scopes
+     */
+    private static function get_scopes($scopes) {
+        return implode(' ', array_map(fn($scope) => Spotify::scopes[$scope], $scopes));
+    }
+
+    public static function get_access_token($scopes = null, $response_type = null) {
         $client_id = 'acce4313959e4859affc19f105c6acdf';
         $client_secret = '1a28ed102e824cb384499fe06e770ab8';
 
+        $query = ($scopes != null || $response_type != null) ? ("?".
+            ($response_type ? "response_type=$response_type" : '').
+            "&client_id=adaaf209fb064dfab873a71817029e0d".
+            ($scopes ? '&scopes='.urlencode(self::get_scopes($scopes)) : '').
+            '&redirect_uri=https://developer.spotify.com/documentation/web-playback-sdk/quick-start/'
+        ) : '';
+
         $options = [
-            CURLOPT_URL => 'https://accounts.spotify.com/api/token',
+            CURLOPT_URL => "https://accounts.spotify.com/api/token$query",
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
@@ -68,7 +82,7 @@ class Spotify extends Model
         return $access_token;
     }
 
-    public static function m_curl_exec($url) {
+    private static function m_curl_exec($url) {
         $access_token = self::get_access_token();
         $options = [
             CURLOPT_URL => $url,
@@ -81,6 +95,7 @@ class Spotify extends Model
         ];
         $ch = curl_init();
         curl_setopt_array($ch, $options);
+//        dd($options);
         $content = json_decode(curl_exec($ch));
         curl_close($ch);
         return $content;
@@ -98,17 +113,10 @@ class Spotify extends Model
     }
 
     /**
-     * @param $scopes array Array of scopes
-     */
-    public static function get_scopes($scopes) {
-        return implode(' ', array_map(fn($scope) => Spotify::scopes[$scope], $scopes));
-    }
-
-    /**
      * @param $type string Between artists, genres and tracks
      * @param $limit int Numer of items
      */
-    public static function get_top($type, $limit) {
+    public static function get_top($type, $limit = 10) {
         $query = http_build_query([
             'limit' => $limit,
             'market' => 'US',
@@ -119,8 +127,13 @@ class Spotify extends Model
         return self::m_curl_exec($url);
     }
 
-    public static function new_albums() {
-        $url = 'https://api.spotify.com/v1/browse/new-releases';
+    public static function new_albums($offset = 0, $limit = 10) {
+        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
+        return self::m_curl_exec($url);
+    }
+
+    public static function get_track($id) {
+        $url = "https://api.spotify.com/v1/tracks/$id";
 
         return self::m_curl_exec($url);
     }

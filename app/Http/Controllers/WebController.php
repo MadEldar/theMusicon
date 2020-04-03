@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 class WebController extends Controller
 {
     public function home() {
+//        dd(Spotify::get_access_token(['umps']));
         return view('musicon/index', [
             'title' => 'Home | The Musicon',
             'message' => Session::get('message') ?? null

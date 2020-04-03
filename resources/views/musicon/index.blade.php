@@ -114,12 +114,18 @@ use App\Spotify;
                         <div class="single-album-area wow fadeInUp" data-wow-delay="300ms">
                             <div class="album-thumb">
                                 <img src="{{ $track->album->images[1]->url }}" alt="">
-                                <!-- Play Icon -->
-                                <div class="play-icon">
-                                    <a href="{{ $track->preview_url }}" class="video--play--btn">
-                                        <span class="icon-play-button"></span>
-                                    </a>
-                                </div>
+                                @if(!isset($track->preview_url))
+                                    <div class="album-price">
+                                        <p>No preview</p>
+                                    </div>
+                                @else
+                                    <!-- Play Icon -->
+                                    <div class="play-icon">
+                                        <a href="{{ $track->preview_url }}" class="video--play--btn">
+                                            <span class="icon-play-button"></span>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                             <div class="album-info">
                                 <a href="#">
@@ -146,9 +152,12 @@ use App\Spotify;
     <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:url('musicon/img/bg-img/bg-4.jpg');">
         <div class="container">
             <div class="row align-items-end">
+                @php
+                $new_track = Spotify::get_track('3tPo4KskHgUvu4OKCXAkhC');
+                @endphp
                 <div class="col-12 col-md-5 col-lg-4">
                     <div class="featured-artist-thumb">
-                        <img src="{{ asset('musicon/img/bg-img/fa.jpg') }}" alt="">
+                        <img src="{{ $new_track->album->images[0]->url }}" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-md-7 col-lg-8">
@@ -158,10 +167,10 @@ use App\Spotify;
                             <p>See what’s new</p>
                             <h2>Try new</h2>
                         </div>
-                        <p>Nam tristique ex vel magna tincidunt, ut porta nisl finibus. Vivamus eu dolor eu quam varius rutrum. Fusce nec justo id sem aliquam fringilla nec non lacus. Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
+                        <p>Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>01. Main Hit Song</p>
+                                <p>{{ $new_track->name }}</p>
                             </div>
                             <audio preload="auto" controls>
                                 <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
@@ -456,6 +465,38 @@ use App\Spotify;
 
     <!-- ##### All Javascript Script ##### -->
     @include('musicon/partials/scripts')
-</body>
+    <script>
+        (() => {
+            window.onSpotifyWebPlaybackSDKReady = () => {
+                const token = "{{Spotify::get_access_token(['stream', 'ure', 'umps', 'urp'], 'token')}}";
+                const player = new Spotify.Player({
+                    name: 'Web Playback SDK Quick Start Player',
+                    getOAuthToken: cb => { cb(token); }
+                });
 
+                // Error handling
+                player.addListener('initialization_error', ({ message }) => { console.error(message); });
+                player.addListener('authentication_error', ({ message }) => { console.error(message); });
+                player.addListener('account_error', ({ message }) => { console.error(message); });
+                player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+                // Playback status updates
+                player.addListener('player_state_changed', state => { console.log(state); });
+
+                // Ready
+                player.addListener('ready', ({ device_id }) => {
+                    console.log('Ready with Device ID', device_id);
+                });
+
+                // Not Ready
+                player.addListener('not_ready', ({ device_id }) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+
+                // Connect to the player!
+                player.connect();
+            };
+        })();
+    </script>
+</body>
 </html>
