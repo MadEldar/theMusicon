@@ -15,11 +15,8 @@ return [
     |
     */
 
-<<<<<<< Updated upstream
-=======
-//    'default' => 'pgsql',
->>>>>>> Stashed changes
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'pgsql',
+//    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,11 +67,11 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => 'ec2-18-235-97-230.compute-1.amazonaws.com',
+            'port' => 5432,
+            'database' => 'ddppfomi9m2qi7',
+            'username' => 'fpvukeqjjdhmao',
+            'password' => '2ac879f22e9f316846b5305f622f037614d78f16efe70096b08a374f7c17fc53',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
