@@ -15,6 +15,10 @@ return [
     |
     */
 
+<<<<<<< Updated upstream
+=======
+//    'default' => 'pgsql',
+>>>>>>> Stashed changes
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\DELL\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\DELL\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="D:\php_project\theMusicon" t="IncludeFlat">
+      <e p="node_modules\@types" t="IncludeRecursive">
+        <e p="events" t="IncludeRecursive" />
+        <e p="minimatch" t="IncludeRecursive" />
+        <e p="node" t="IncludeRecursive" />
+      </e>
+      <e p="node_modules\axios" t="IncludeRecursive" />
+      <e p="node_modules\cross-env" t="IncludeRecursive" />
+      <e p="node_modules\laravel-mix" t="IncludeRecursive" />
+      <e p="node_modules\lodash" t="IncludeRecursive" />
+      <e p="node_modules\resolve-url-loader" t="IncludeRecursive" />
+      <e p="node_modules\sass" t="IncludeRecursive" />
+      <e p="node_modules\sass-loader" t="IncludeRecursive" />
+    </e>
+  </component>
+</project>
