@@ -8,6 +8,7 @@ use App\Mail\VerifyEmail;
 use App\Spotify;
 use App\Token;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -16,18 +17,34 @@ use Illuminate\Support\Str;
 class WebController extends Controller
 {
     public function home() {
-//        dd(Spotify::get_access_token(['umps']));
+        $access_token = Spotify::get_access_token();
         return view('musicon/index', [
             'title' => 'Home | The Musicon',
-            'message' => Session::get('message') ?? null
+            'message' => Session::get('message') ?? null,
+            'albums' => Spotify::new_albums(10, 0, $access_token)->albums->items,
+            'tracks' => Spotify::get_top('artists', 12, $access_token)->tracks,
+            'new_track' => Spotify::get_track(null, true, $access_token),
+            'new_releases' => Spotify::new_releases(6, 0, $access_token)->albums->items,
+            'top_tracks' => Spotify::get_top('tracks', 6, $access_token)->tracks,
+            'top_artists' => Spotify::get_top('artists', 6, $access_token)->tracks
         ]);
     }
     public function albums() {
+        $albums = isset($_GET['q']) && $_GET['q'] != 'all' ?
+            Spotify::search($_GET['q'], 'album', 18, 0)->albums->items :
+            Spotify::new_albums(18, 0)->albums->items;
         return view('musicon/albums', [
             'title' => 'Albums | The Musicon',
-            'message' => Session::get('message') ?? null
+            'message' => Session::get('message') ?? null,
+            'albums' => $albums
         ]);
     }
+    public function more_albums(Request $req) {
+        return $req->get('q') != 'all'?
+            Spotify::search($req->get('q'), 'album', 18, $req->get('offset'))->albums->items :
+            Spotify::new_albums(18, $req->get('offset'))->albums->items;
+    }
+
     public function events() {
         return view('musicon/events', [
             'title' => 'Events | The Musicon',

@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Spotify extends Model
+class Spotify
 {
     private const search_types = [
         'album',
@@ -58,23 +56,23 @@ class Spotify extends Model
     }
 
     public static function get_access_token($scopes = null, $response_type = null) {
-        $client_id = 'acce4313959e4859affc19f105c6acdf';
-        $client_secret = '1a28ed102e824cb384499fe06e770ab8';
-
-        $query = ($scopes != null || $response_type != null) ? ("?".
-            ($response_type ? "response_type=$response_type" : '').
-            "&client_id=adaaf209fb064dfab873a71817029e0d".
-            ($scopes ? '&scopes='.urlencode(self::get_scopes($scopes)) : '').
-            '&redirect_uri=https://developer.spotify.com/documentation/web-playback-sdk/quick-start/'
-        ) : '';
+        $client_id = 'a7eb418c40724b3d9a5a080fea1ff4ad';
+        $client_secret = '2035ae30117941e1b0470dab57e4c829';
+        $query = [
+            'client_id' => $client_id,
+            'redirect_uri' => 'https://developer.spotify.com/documentation/web-playback-sdk/quick-start/'
+        ];
+        if ($response_type) $query['response_type'] = $response_type;
+        if ($scopes) $query['scope'] = self::get_scopes($scopes);
 
         $options = [
-            CURLOPT_URL => "https://accounts.spotify.com/api/token$query",
+            CURLOPT_URL => "https://accounts.spotify.com/api/token?".http_build_query($query),
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
             CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode($client_id . ':' . $client_secret)],
         ];
+//        dd($options);
         $ch = curl_init();
         curl_setopt_array($ch, $options);
         $access_token = json_decode(curl_exec($ch))->access_token;
@@ -82,13 +80,12 @@ class Spotify extends Model
         return $access_token;
     }
 
-    private static function m_curl_exec($url) {
-        $access_token = self::get_access_token();
+    private static function m_curl_exec($url, $access_token) {
         $options = [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer $access_token",
+                "Authorization: Bearer " . ($access_token == null ? self::get_access_token() : $access_token),
                 'Accept: application/json',
                 'Content-Type: application/json'
             ],
@@ -101,22 +98,30 @@ class Spotify extends Model
         return $content;
     }
 
-    public static function search($q, $type) {
+    /**
+     * @param $q string Query to search
+     * @param $type string Search with type, including album, artist, playlist, track, seperated by comma
+     * @param null $access_token
+     * @return mixed
+     */
+    public static function search($q = '', $type, $limit = 10, $offset = 0, $access_token = null) {
         $query = http_build_query([
             'q' => $q,
             'type' => $type ?? implode(',', Spotify::search_types),
-            'grant_type' => 'client_credentials'
+            'market' => 'VN',
+            'limit' => $limit,
+            'offset' => $offset
         ]);
         $url = 'https://api.spotify.com/v1/search';
 
-        return self::m_curl_exec("$url?$query");
+        return self::m_curl_exec("$url?$query", $access_token);
     }
 
     /**
      * @param $type string Between artists, genres and tracks
-     * @param $limit int Numer of items
+     * @param $limit int Number of items
      */
-    public static function get_top($type, $limit = 10) {
+    public static function get_top($type, $limit = 10, $access_token = null) {
         $query = http_build_query([
             'limit' => $limit,
             'market' => 'US',
@@ -124,17 +129,24 @@ class Spotify extends Model
         ]);
         $url = "https://api.spotify.com/v1/recommendations?$query&min_energy=0.4&min_popularity=50";
 
-        return self::m_curl_exec($url);
+        return self::m_curl_exec($url, $access_token);
     }
 
-    public static function new_albums($offset = 0, $limit = 10) {
+    public static function new_albums($limit = 10, $offset = 0, $access_token = null) {
         $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
-        return self::m_curl_exec($url);
+        return self::m_curl_exec($url, $access_token);
     }
 
-    public static function get_track($id) {
-        $url = "https://api.spotify.com/v1/tracks/$id";
+    public static function get_track($id, $rand = false, $access_token = null) {
+        $url = "https://api.spotify.com/v1/tracks/".
+            ($rand?self::seeds['tracks'][array_rand(self::seeds['tracks'])]:$id);
 
-        return self::m_curl_exec($url);
+        return self::m_curl_exec($url, $access_token);
+    }
+
+    public static function new_releases($limit = 10, $offset = 0, $access_token) {
+        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
+
+        return self::m_curl_exec($url, $access_token);
     }
 }

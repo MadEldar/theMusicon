@@ -779,10 +779,10 @@ img {
   .featured-artist-content p {
     color: #fff; }
 
-.browse-by-catagories {
+.browse-by-categories {
   position: relative;
   z-index: 1; }
-  .browse-by-catagories a {
+  .browse-by-categories a {
     display: inline-block;
     background-color: #f4f4f4;
     border: 2px solid transparent;
@@ -790,25 +790,25 @@ img {
     font-size: 15px;
     margin-right: 5px; }
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
-      .browse-by-catagories a {
+      .browse-by-categories a {
         padding: 4px 7px;
         font-size: 14px;
         margin-right: 4px; } }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
-      .browse-by-catagories a {
+      .browse-by-categories a {
         padding: 4px 7px;
         font-size: 14px;
         margin-right: 5px;
         margin-bottom: 5px; } }
     @media only screen and (max-width: 767px) {
-      .browse-by-catagories a {
+      .browse-by-categories a {
         padding: 2px 5px;
         font-size: 13px;
         margin-right: 5px;
         margin-bottom: 5px; } }
-    .browse-by-catagories a:hover, .browse-by-catagories a:focus, .browse-by-catagories a.active {
+    .browse-by-categories a:hover, .browse-by-categories a:focus, .browse-by-categories a.active {
       border: 2px solid #000000; }
-    .browse-by-catagories a:first-child {
+    .browse-by-categories a:first-child {
       border-color: transparent;
       background-color: transparent; }
 
@@ -1693,6 +1693,31 @@ button:focus {
 
 .color-primary {
     color: #23AF92
+}
+
+.popular-artists-area, .new-hits-area {
+    border: 1px solid transparent;
+    background: none;
+}
+
+.popular-artists-area:hover, .popular-artists-area:focus,
+.new-hits-area:hover, .new-hits-area:focus {
+    background-color: #f5f9fa;
+    border-color: #d8d8d8;
+}
+
+.browse-by-categories button {
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f4f4f4;
+    border: 2px solid transparent;
+    padding: 6px 9px;
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.browse-by-categories button:hover, .browse-by-categories button:focus, .browse-by-categories button.active {
+    border: 2px solid #000000;
 }
 
 /*# sourceMappingURL=style.css.map */

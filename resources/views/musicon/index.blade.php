@@ -2,7 +2,7 @@
 <html lang="en">
 @include('musicon/partials/head')
 @php
-use App\Spotify;
+    use App\Spotify;
 @endphp
 <body>
     <!-- Message -->
@@ -77,7 +77,7 @@ use App\Spotify;
             <div class="row">
                 <div class="col-12">
                     <div class="albums-slideshow owl-carousel">
-                        @foreach(Spotify::new_albums()->albums->items as $album)
+                        @foreach($albums as $album)
                         <!-- Single Album -->
                         <div class="single-album">
                             <img src="{{ $album->images[1]->url }}" alt="">
@@ -103,12 +103,12 @@ use App\Spotify;
                 <div class="col-12">
                     <div class="section-heading style-2">
                         <p>See what’s new</p>
-                        <h2>Top tracks</h2>
+                        <h2>Recommended tracks</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @foreach(Spotify::get_top('artists', 12)->tracks as $track)
+                @foreach($tracks as $track)
                     <!-- Single Album Area -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-album-area wow fadeInUp" data-wow-delay="300ms">
@@ -152,9 +152,6 @@ use App\Spotify;
     <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:url('musicon/img/bg-img/bg-4.jpg');">
         <div class="container">
             <div class="row align-items-end">
-                @php
-                $new_track = Spotify::get_track('3tPo4KskHgUvu4OKCXAkhC');
-                @endphp
                 <div class="col-12 col-md-5 col-lg-4">
                     <div class="featured-artist-thumb">
                         <img src="{{ $new_track->album->images[0]->url }}" alt="">
@@ -172,9 +169,7 @@ use App\Spotify;
                             <div class="song-name">
                                 <p>{{ $new_track->name }}</p>
                             </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
+                            <iframe src="{{ $new_track->preview_url }}" frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
@@ -191,76 +186,20 @@ use App\Spotify;
                 <div class="col-12 col-lg-4">
                     <div class="weeks-top-area mb-100">
                         <div class="section-heading text-left mb-50 wow fadeInUp" data-wow-delay="50ms">
-                            <p>See what’s new</p>
-                            <h2>This week’s top</h2>
+                            <h2>New Releases</h2>
                         </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="100ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt1.jpg') }}" alt="">
+                        @foreach($new_releases as $album)
+                            <!-- Single Top Item -->
+                            <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="100ms">
+                                <div class="thumbnail">
+                                    <img style="width:75px" src="{{ $album->images[2]->url }}" alt="">
+                                </div>
+                                <div class="content-">
+                                    <h6>{{ $album->artists[0]->name }}</h6>
+                                    <p>{{ $album->name }}</p>
+                                </div>
                             </div>
-                            <div class="content-">
-                                <h6>Sam Smith</h6>
-                                <p>Underground</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="150ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt2.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <h6>Power Play</h6>
-                                <p>In my mind</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="200ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt3.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <h6>Cristinne Smith</h6>
-                                <p>My Music</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="250ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt4.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <h6>The Music Band</h6>
-                                <p>Underground</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="300ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt5.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <h6>Creative Lyrics</h6>
-                                <p>Songs and stuff</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-top-item d-flex wow fadeInUp" data-wow-delay="350ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/wt6.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <h6>The Culture</h6>
-                                <p>Pop Songs</p>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
                 </div>
 
@@ -268,105 +207,22 @@ use App\Spotify;
                 <div class="col-12 col-lg-4">
                     <div class="new-hits-area mb-100">
                         <div class="section-heading text-left mb-50 wow fadeInUp" data-wow-delay="50ms">
-                            <p>See what’s new</p>
                             <h2>New Hits</h2>
                         </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt7.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>Sam Smith</h6>
-                                    <p>Underground</p>
-                                </div>
-                            </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="150ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt8.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>Power Play</h6>
-                                    <p>In my mind</p>
+                        @foreach($top_tracks as $track)
+                            <!-- Single Top Item -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="thumbnail">
+                                        <img style="width:75px" src="{{ $track->album->images[2]->url }}" alt="">
+                                    </div>
+                                    <div class="content-">
+                                        <h6>{{ $track->artists[0]->name }}</h6>
+                                        <p>{{ $track->name }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="200ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt9.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>Cristinne Smith</h6>
-                                    <p>My Music</p>
-                                </div>
-                            </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="250ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt10.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>The Music Band</h6>
-                                    <p>Underground</p>
-                                </div>
-                            </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt11.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>Creative Lyrics</h6>
-                                    <p>Songs and stuff</p>
-                                </div>
-                            </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
-
-                        <!-- Single Top Item -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="350ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="thumbnail">
-                                    <img src="{{ asset('musicon/img/bg-img/wt12.jpg') }}" alt="">
-                                </div>
-                                <div class="content-">
-                                    <h6>The Culture</h6>
-                                    <p>Pop Songs</p>
-                                </div>
-                            </div>
-                            <audio preload="auto" controls>
-                                <source src="{{ asset('musicon/audio/dummy-audio.mp3') }}">
-                            </audio>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -374,80 +230,19 @@ use App\Spotify;
                 <div class="col-12 col-lg-4">
                     <div class="popular-artists-area mb-100">
                         <div class="section-heading text-left mb-50 wow fadeInUp" data-wow-delay="50ms">
-                            <p>See what’s new</p>
                             <h2>Popular Artist</h2>
                         </div>
-
+                        @foreach($top_artists as $track)
                         <!-- Single Artist -->
                         <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="100ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa1.jpg') }}" alt="">
+                            <div class="thumbnail" style="width:75px">
+                                <img style="width:75px" src="{{ $track->album->images[1]->url }}" alt="">
                             </div>
                             <div class="content-">
-                                <p>Sam Smith</p>
+                                <p>{{ $track->artists[0]->name }}</p>
                             </div>
                         </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="150ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa2.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>William Parker</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="200ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa3.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>Jessica Walsh</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="250ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa4.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>Tha Stoves</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="300ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa5.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>DJ Ajay</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="350ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa6.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>Radio Vibez</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Artist -->
-                        <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="400ms">
-                            <div class="thumbnail">
-                                <img src="{{ asset('musicon/img/bg-img/pa7.jpg') }}" alt="">
-                            </div>
-                            <div class="content-">
-                                <p>Music 4u</p>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -465,38 +260,5 @@ use App\Spotify;
 
     <!-- ##### All Javascript Script ##### -->
     @include('musicon/partials/scripts')
-    <script>
-        (() => {
-            window.onSpotifyWebPlaybackSDKReady = () => {
-                const token = "{{Spotify::get_access_token(['stream', 'ure', 'umps', 'urp'], 'token')}}";
-                const player = new Spotify.Player({
-                    name: 'Web Playback SDK Quick Start Player',
-                    getOAuthToken: cb => { cb(token); }
-                });
-
-                // Error handling
-                player.addListener('initialization_error', ({ message }) => { console.error(message); });
-                player.addListener('authentication_error', ({ message }) => { console.error(message); });
-                player.addListener('account_error', ({ message }) => { console.error(message); });
-                player.addListener('playback_error', ({ message }) => { console.error(message); });
-
-                // Playback status updates
-                player.addListener('player_state_changed', state => { console.log(state); });
-
-                // Ready
-                player.addListener('ready', ({ device_id }) => {
-                    console.log('Ready with Device ID', device_id);
-                });
-
-                // Not Ready
-                player.addListener('not_ready', ({ device_id }) => {
-                    console.log('Device ID has gone offline', device_id);
-                });
-
-                // Connect to the player!
-                player.connect();
-            };
-        })();
-    </script>
 </body>
 </html>
