@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-12">
                     <form action="/albums" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
-                        <button type="submit" name="q" value="All" data-filter="*">Browse All</button>
+                        <button type="submit" name="q" value="All" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</button>
                         @foreach(range('A', 'Z') as $val)
                         <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</button>
                         @endforeach
@@ -36,7 +36,6 @@
                     </form>
                 </div>
             </div>
-            @csrf
             <div class="row oneMusic-albums">
                 @foreach($albums as $album)
                 <!-- Single Album -->

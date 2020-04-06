@@ -30,7 +30,8 @@ class WebController extends Controller
         ]);
     }
     public function albums() {
-        $albums = isset($_GET['q']) && $_GET['q'] != 'all' ?
+        if (!isset($_GET['q'])) $_GET['q'] = 'all';
+        $albums = $_GET['q'] != 'all' ?
             Spotify::search($_GET['q'], 'album', 18, 0)->albums->items :
             Spotify::new_albums(18, 0)->albums->items;
         return view('musicon/albums', [
@@ -69,6 +70,7 @@ class WebController extends Controller
             'message' => Session::get('message') ?? null
         ]);
     }
+
     public function sign_in_view() {
         return view('musicon/sign-in', [
             'title' => 'Sign in | The Musicon',
@@ -113,6 +115,11 @@ class WebController extends Controller
         ]);
     }
 
+    public function sign_out() {
+        Auth::logout();
+        return redirect()->back();
+    }
+
     public function verify($token) {
         $db_token = Token::where('token', $token)->first();
         if (isset($db_token) && $db_token->usage == 0) {
@@ -121,7 +128,7 @@ class WebController extends Controller
             return redirect('/sign-in')
                 ->with('message', [
                 'type' => 'success',
-                'content' => 'User verification suceeded'
+                'content' => 'User verification succeeded'
             ]);
         } else if (isset($db_token) && $db_token->usage != 0) {
             return redirect('/sign-in')

@@ -261,4 +261,7 @@
     <!-- ##### All Javascript Script ##### -->
     @include('musicon/partials/scripts')
 </body>
+<script>
+
+</script>
 </html>

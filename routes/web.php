@@ -25,6 +25,7 @@ Route::get('/sign-in', 'WebController@sign_in_view');
 Route::post('/sign-in', 'WebController@sign_in');
 Route::get('/sign-up', 'WebController@sign_up_view');
 Route::post('/sign-up', 'WebController@sign_up');
+Route::get('/sign-out', 'WebController@sign_out');
 Route::get('/verify/{token}', 'WebController@verify');
 
 //Admin

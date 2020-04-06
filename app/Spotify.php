@@ -47,6 +47,7 @@ class Spotify
             '4bCuBkeVRofawnFkGu05fu'
         ]
     ];
+    private $access_token;
 
     /**
      * @param $scopes array Array of scopes
@@ -55,24 +56,17 @@ class Spotify
         return implode(' ', array_map(fn($scope) => Spotify::scopes[$scope], $scopes));
     }
 
-    public static function get_access_token($scopes = null, $response_type = null) {
-        $client_id = 'a7eb418c40724b3d9a5a080fea1ff4ad';
-        $client_secret = '2035ae30117941e1b0470dab57e4c829';
-        $query = [
-            'client_id' => $client_id,
-            'redirect_uri' => 'https://developer.spotify.com/documentation/web-playback-sdk/quick-start/'
-        ];
-        if ($response_type) $query['response_type'] = $response_type;
-        if ($scopes) $query['scope'] = self::get_scopes($scopes);
+    public static function get_access_token() {
+        $client_id = env('SPOTIFY_CLIENT_ID');
+        $client_secret = env('SPOTIFY_CLIENT_SECRET');
 
         $options = [
-            CURLOPT_URL => "https://accounts.spotify.com/api/token?".http_build_query($query),
+            CURLOPT_URL => "https://accounts.spotify.com/api/token",
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
             CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode($client_id . ':' . $client_secret)],
         ];
-//        dd($options);
         $ch = curl_init();
         curl_setopt_array($ch, $options);
         $access_token = json_decode(curl_exec($ch))->access_token;
@@ -92,7 +86,6 @@ class Spotify
         ];
         $ch = curl_init();
         curl_setopt_array($ch, $options);
-//        dd($options);
         $content = json_decode(curl_exec($ch));
         curl_close($ch);
         return $content;

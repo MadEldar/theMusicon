@@ -55,18 +55,23 @@
                                 <!-- Login/Register -->
                                 <div class="login-register-btn mr-50">
                                     <span>
-                                        <a href="{{url('/sign-in')}}" id="loginBtn" style="color: #23AF92">Sign in /</a>
+                                        <a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in /</a>
                                     </span>
                                     <span>
-                                        <a href="{{url('/sign-up')}}" id="loginBtn" style="color: #23AF92">Sign up</a>
+                                        <a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a>
                                     </span>
                                 </div>
                             @else
                                 <!-- User profile -->
                                 <div class="login-register-btn mr-50">
                                     <span>
-                                        <a href="{{url('/user/profile')}}" id="loginBtn" style="color: #23AF92">
-                                            {{ Auth::user()->first_name }}'s profile
+                                        <a href="{{url('/user/profile')}}" style="color: #23AF92">
+                                            {{ Auth::user()->first_name }}'s profile /
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="{{url('/sign-out')}}" style="color: #23AF92">
+                                            Sign out
                                         </a>
                                     </span>
                                 </div>
