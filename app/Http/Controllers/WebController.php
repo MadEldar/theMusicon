@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class WebController extends Controller
 {
     public function home(){
-        return view('musicon/albums');
+        return view('musicon/index');
     }
     public function albums(){
         return view('musicon/albums');
@@ -26,10 +26,10 @@ class WebController extends Controller
     public function elements(){
         return view('musicon/elements');
     }
-    public function login(){
-        return view('musicon/login');
+    public function playerMusic(){
+        return view('musicon/player-music');
     }
-    public function register(){
-        return view('musicon/register');
+    public function artist(){
+        return view('musicon/artist');
     }
 }

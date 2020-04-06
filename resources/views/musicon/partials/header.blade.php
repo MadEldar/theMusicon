@@ -35,12 +35,15 @@
                                     <ul class="dropdown">
                                         <li><a href="{{url('/')}}">Home</a></li>
                                         <li><a href="{{url('/albums')}}">Albums</a></li>
+                                        <li><a href="{{url('/artist')}}">Artist</a></li>
                                         <li><a href="{{url('/events')}}">Events</a></li>
                                         <li><a href="{{url('/news')}}">News</a></li>
                                         <li><a href="{{url('/contacts')}}">Contact</a></li>
                                         <li><a href="{{url('/elements')}}">Elements</a></li>
                                         <li><a href="{{url('/login')}}" style="color: #23AF92">Login</a></li>
                                         <li><a href="{{url('/register')}}" style="color: #23AF92">Register</a></li>
+                                        <li><a href="{{url('/information')}}" style="color: #23AF92">Information</a></li>
+
                                     </ul>
                                 </li>
                             </ul>

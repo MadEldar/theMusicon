@@ -12,15 +12,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// home
+//web
+
 Route::get('/', 'WebController@home');
 Route::get('/albums', 'WebController@albums');
 Route::get('/events', 'WebController@events');
 Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
-Route::get('/login', 'WebController@login');
-Route::get('/register', 'WebController@register');
+Route::get('/player-music', 'WebController@playerMusic');
+Route::get('/artist', 'WebController@');
+
+
+//user
+
+Route::get('/login', 'UserController@login');
+Route::get('/register', 'UserController@register');
+Route::get('/information', "UserController@information");
+
 //admin
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
