@@ -54,18 +54,6 @@ class User extends Authenticatable
         2 => 'Verified'
     ];
 
-    public function FavoriteAlbums() {
-        return $this->belongsToMany('\App\Album', 'favorite_albums', 'user_id', 'album_id');
-    }
-
-    public function FavoriteSongs() {
-        return $this->belongsToMany('\App\Song', 'favorite_songs', 'user_id', 'song_id');
-    }
-
-    public function FollowedArtist() {
-        return $this->belongsToMany('\App\Artist', 'artist_followers', 'user_id', 'artist_id');
-    }
-
     public function Comments() {
         return $this->hasMany('\App\Comments');
     }

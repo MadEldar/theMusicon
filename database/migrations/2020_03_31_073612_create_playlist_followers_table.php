@@ -15,9 +15,8 @@ class CreatePlaylistFollowersTable extends Migration
     {
         Schema::create('playlist_followers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('playlist_id');
+            $table->string('playlist_id');
             $table->unsignedInteger('user_id');
-            $table->foreign('playlist_id')->references('id')->on('playlists');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -13,10 +13,6 @@ class PlaylistFollower extends Model
         'user_id'
     ];
 
-    public function Playlist() {
-        return $this->belongsTo('\App\Playlist');
-    }
-
     public function User() {
         return $this->belongsTo('\App\User');
     }

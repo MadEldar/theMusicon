@@ -15,9 +15,8 @@ class CreateGenreFollowersTable extends Migration
     {
         Schema::create('genre_followers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('genre_id');
+            $table->string('genre_id');
             $table->unsignedInteger('user_id');
-            $table->foreign('genre_id')->references('id')->on('genres');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

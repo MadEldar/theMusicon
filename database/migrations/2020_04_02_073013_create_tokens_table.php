@@ -19,6 +19,7 @@ class CreateTokensTable extends Migration
             $table->string('token');
             $table->unsignedTinyInteger('usage');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
