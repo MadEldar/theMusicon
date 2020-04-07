@@ -21,6 +21,12 @@ Route::get('/events', 'WebController@events');
 Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
+Route::get('/player-music', 'WebController@playerMusic');
+Route::get('/artist', 'WebController@');
+
+
+//User
+Route::get('/information', "UserController@information");
 Route::get('/sign-in', 'WebController@sign_in_view');
 Route::post('/sign-in', 'WebController@sign_in');
 Route::get('/sign-up', 'WebController@sign_up_view');
@@ -35,6 +41,3 @@ Route::get('/administrator/users', 'AdminController@users');
 Route::post('/administrator/users/edit', 'AdminController@user_edit');
 Route::get('/administrator/albums', 'AdminController@albums');
 Route::get('/administrator/song', 'AdminController@song');
-
-//API
-Route::post('/get-access-token', 'WebAPI@player_access_token');
