@@ -14,10 +14,6 @@ class ArtistFollower extends Model
         'artist_id'
     ];
 
-    public function Artist() {
-        return $this->belongsTo('\App\Artist');
-    }
-
     public function User() {
         return $this->belongsTo('\App\User');
     }

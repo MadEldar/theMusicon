@@ -9,3 +9,5 @@
 <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
 <script src="{{ asset('admin/js/misc.js') }}"></script>
 <!-- endinject -->
+<!-- custom scripts -->
+<script src="{{ asset('admin/js/custom.js') }}"></script>

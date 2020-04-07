@@ -13,10 +13,6 @@ class GenreFollower extends Model
         'user_id'
     ];
 
-    public function Genre() {
-        return $this->belongsTo('\App\Genre');
-    }
-
     public function User() {
         return $this->belongsTo('\App\User');
     }

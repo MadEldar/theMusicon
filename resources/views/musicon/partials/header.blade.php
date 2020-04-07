@@ -30,8 +30,8 @@
                             <ul>
                                 <li><a href="{{url('/')}}">Home</a></li>
                                 <li><a href="{{url('/albums')}}">Albums</a></li>
-                                <li><a href="{{url('/events')}}">Events</a></li>
                                 <li><a href="{{url('/news')}}">News</a></li>
+                                <li><a href="{{url('/events')}}">Events</a></li>
                                 <li><a href="{{url('/contacts')}}">Contact</a></li>
                                 <li><a href="{{url('/pages')}}">Pages</a>
                                     <ul class="dropdown">
@@ -46,6 +46,8 @@
                                         @if(!Auth::check())
                                             <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
                                             <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
+                                        @elseif(Auth::user()->user_role == 0)
+                                            <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a></li>
                                         @endif
                                     </ul>
                                 </li>
@@ -57,18 +59,23 @@
                                 <!-- Login/Register -->
                                 <div class="login-register-btn mr-50">
                                     <span>
-                                        <a href="{{url('/sign-in')}}" id="loginBtn" style="color: #23AF92">Sign in /</a>
+                                        <a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in /</a>
                                     </span>
                                     <span>
-                                        <a href="{{url('/sign-up')}}" id="loginBtn" style="color: #23AF92">Sign up</a>
+                                        <a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a>
                                     </span>
                                 </div>
                             @else
                                 <!-- User profile -->
                                 <div class="login-register-btn mr-50">
                                     <span>
-                                        <a href="{{url('/user/profile')}}" id="loginBtn" style="color: #23AF92">
-                                            {{ Auth::user()->first_name }}'s profile
+                                        <a href="{{url('/user/profile')}}" style="color: #23AF92">
+                                            {{ Auth::user()->first_name }}'s profile /
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="{{url('/sign-out')}}" style="color: #23AF92">
+                                            Sign out
                                         </a>
                                     </span>
                                 </div>

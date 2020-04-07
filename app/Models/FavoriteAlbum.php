@@ -16,8 +16,4 @@ class FavoriteAlbum extends Model
     public function User() {
         return $this->belongsTo('\App\User');
     }
-
-    public function Album() {
-        return $this->belongsTo('\App\Album');
-    }
 }

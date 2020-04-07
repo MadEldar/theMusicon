@@ -16,9 +16,8 @@ class CreateFavoriteSongsTable extends Migration
         Schema::create('favorite_songs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedBigInteger('song_id');
+            $table->string('song_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('song_id')->references('id')->on('songs');
         });
     }
 

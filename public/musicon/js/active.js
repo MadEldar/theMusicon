@@ -100,23 +100,23 @@
 
     // :: 4.0 Masonary Gallery Active Code
     if ($.fn.imagesLoaded) {
-        $('.oneMusic-albums').imagesLoaded(function () {
-            // filter items on button click
-            $('.catagory-menu').on('click', 'a', function () {
-                var filterValue = $(this).attr('data-filter');
-                $grid.isotope({
-                    filter: filterValue
-                });
-            });
-            // init Isotope
-            var $grid = $('.oneMusic-albums').isotope({
-                itemSelector: '.single-album-item',
-                percentPosition: true,
-                masonry: {
-                    columnWidth: '.single-album-item'
-                }
-            });
-        });
+        // $('.oneMusic-albums').imagesLoaded(function () {
+        //     // filter items on button click
+        //     $('.catagory-menu').on('click', 'a', function () {
+        //         var filterValue = $(this).attr('data-filter');
+        //         $grid.isotope({
+        //             filter: filterValue
+        //         });
+        //     });
+        //     // init Isotope
+        //     var $grid = $('.oneMusic-albums').isotope({
+        //         itemSelector: '.single-album-item',
+        //         percentPosition: true,
+        //         masonry: {
+        //             columnWidth: '.single-album-item'
+        //         }
+        //     });
+        // });
     }
 
     // :: 5.0 Video Active Code
@@ -205,7 +205,7 @@
     if (browserWindow.width() > 767) {
         new WOW().init();
     }
-    
+
     // :: 14.0 Gallery Menu Active Code
     $('.catagory-menu a').on('click', function () {
         $('.catagory-menu a').removeClass('active');

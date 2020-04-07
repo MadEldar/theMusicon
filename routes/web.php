@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 //Home
 Route::get('/', 'WebController@home');
 Route::get('/albums', 'WebController@albums');
+Route::post('/more-albums', 'WebController@more_albums');
+
 Route::get('/events', 'WebController@events');
 Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
@@ -29,11 +31,13 @@ Route::get('/sign-in', 'WebController@sign_in_view');
 Route::post('/sign-in', 'WebController@sign_in');
 Route::get('/sign-up', 'WebController@sign_up_view');
 Route::post('/sign-up', 'WebController@sign_up');
+Route::get('/sign-out', 'WebController@sign_out');
 Route::get('/verify/{token}', 'WebController@verify');
 
 //Admin
-Route::get('/administrator', 'AdminController@admin');
+Route::get('/administrator', 'AdminController@dashboard');
 Route::get('/administrator/table', 'AdminController@table');
-Route::get('/administrator/artist', 'AdminController@artist');
+Route::get('/administrator/users', 'AdminController@users');
+Route::post('/administrator/users/edit', 'AdminController@user_edit');
 Route::get('/administrator/albums', 'AdminController@albums');
 Route::get('/administrator/song', 'AdminController@song');

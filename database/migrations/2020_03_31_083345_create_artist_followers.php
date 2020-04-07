@@ -16,9 +16,8 @@ class CreateArtistFollowers extends Migration
         Schema::create('artist_followers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedBigInteger('artist_id');
+            $table->string('artist_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('artist_id')->references('id')->on('artists');
         });
     }
 
