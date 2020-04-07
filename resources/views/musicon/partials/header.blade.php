@@ -37,10 +37,12 @@
                                     <ul class="dropdown">
                                         <li><a href="{{url('/')}}">Home</a></li>
                                         <li><a href="{{url('/albums')}}">Albums</a></li>
+                                        <li><a href="{{url('/artist')}}">Artist</a></li>
                                         <li><a href="{{url('/events')}}">Events</a></li>
                                         <li><a href="{{url('/news')}}">News</a></li>
                                         <li><a href="{{url('/contacts')}}">Contact</a></li>
                                         <li><a href="{{url('/elements')}}">Elements</a></li>
+                                        <li><a href="{{url('/information')}}" style="color: #23AF92">Information</a></li>
                                         @if(!Auth::check())
                                             <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
                                             <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
