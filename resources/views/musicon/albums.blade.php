@@ -2,18 +2,18 @@
 <html lang="en">
 @include('musicon/partials/head')
 <body>
+    <!-- Message -->
+    @include('musicon/partials/message')
+
     <!-- Preloader -->
     @include('musicon/partials/preloader')
 
     <!-- ##### Header Area Start ##### -->
-    @include('musicon/partials/preloader')
-
-    <!-- ##### Header Area End ##### -->
     @include('musicon/partials/header')
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcumb3.jpg');">
-        <div class="bradcumbContent">
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb3.jpg');">
+        <div class="breadcrumbContent">
             <p>See what’s new</p>
             <h2>Latest Albums</h2>
         </div>
@@ -57,9 +57,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row oneMusic-albums">
-
                 <!-- Single Album -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t c p">
                     <div class="single-album">
@@ -333,5 +331,4 @@
     <!-- ##### All Javascript Script ##### -->
     @include('musicon/partials/scripts')
 </body>
-
 </html>

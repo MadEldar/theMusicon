@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//web
-
+//Home
 Route::get('/', 'WebController@home');
 Route::get('/albums', 'WebController@albums');
 Route::get('/events', 'WebController@events');
@@ -24,25 +23,17 @@ Route::get('/player-music', 'WebController@playerMusic');
 Route::get('/artist', 'WebController@');
 
 
-//user
-
-Route::get('/login', 'UserController@login');
-Route::get('/register', 'UserController@register');
+//User
 Route::get('/information', "UserController@information");
+Route::get('/sign-in', 'WebController@sign_in_view');
+Route::post('/sign-in', 'WebController@sign_in');
+Route::get('/sign-up', 'WebController@sign_up_view');
+Route::post('/sign-up', 'WebController@sign_up');
+Route::get('/verify/{token}', 'WebController@verify');
 
-//admin
+//Admin
 Route::get('/administrator', 'AdminController@admin');
 Route::get('/administrator/table', 'AdminController@table');
 Route::get('/administrator/artist', 'AdminController@artist');
 Route::get('/administrator/albums', 'AdminController@albums');
 Route::get('/administrator/song', 'AdminController@song');
-
-
-Route::get('/admin', fn() => redirect('/admin/home'));
-Route::get('/admin/home', function () {
-    return view('admin/index');
-});
-Route::get('/home', function () {
-    return view('musicon/index');
-});
-Route::get('/api-test', 'MusiconController@search');

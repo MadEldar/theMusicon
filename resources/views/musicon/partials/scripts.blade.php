@@ -8,3 +8,5 @@
 <script src="{{ asset('musicon/js/plugins/plugins.js') }}"></script>
 <!-- Active js -->
 <script src="{{ asset('musicon/js/active.js') }}"></script>
+<!-- User custom -->
+<script src="{{ asset('musicon/js/musicon.js') }}"></script>

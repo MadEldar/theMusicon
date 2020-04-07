@@ -2,16 +2,18 @@
 <html lang="en">
 @include('musicon/partials/head')
 <body>
+    <!-- Message -->
+    @include('musicon/partials/message')
+
     <!-- Preloader -->
     @include('musicon/partials/preloader')
 
     <!-- ##### Header Area Start ##### -->
-    @include('musicon/partials/preloader')
-    <!-- ##### Header Area End ##### -->
     @include('musicon/partials/header')
+
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcumb2.jpg)';">
-        <div class="bradcumbContent">
+    <div class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb2.jpg)';">
+        <div class="breadcrumbContent">
             <p>See what’s new</p>
             <h2>Elements</h2>
         </div>
