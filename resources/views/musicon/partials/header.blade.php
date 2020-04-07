@@ -44,6 +44,8 @@
                                         @if(!Auth::check())
                                             <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
                                             <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
+                                        @elseif(Auth::user()->user_role == 0)
+                                            <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a></li>
                                         @endif
                                     </ul>
                                 </li>

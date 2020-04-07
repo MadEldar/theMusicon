@@ -8,25 +8,36 @@ use App\Mail\VerifyEmail;
 use App\Spotify;
 use App\Token;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class WebController extends Controller
 {
     public function home() {
-        $access_token = Spotify::get_access_token();
+        if (!Cache::has('home')) {
+            $cache = [];
+            $access_token = Spotify::get_access_token();
+            $cache['albums'] = Spotify::new_albums(10, 0, $access_token)->albums->items;
+            $cache['tracks'] = Spotify::get_top('artists', 12, $access_token)->tracks;
+            $cache['new_track'] = Spotify::get_track(null, true, $access_token);
+            $cache['new_releases'] = Spotify::new_releases(6, 0, $access_token)->albums->items;
+            $cache['top_tracks'] = Spotify::get_top('tracks', 6, $access_token)->tracks;
+            $cache['top_artists'] = Spotify::get_top('artists', 6, $access_token)->tracks;
+            Cache::put('home', $cache, Carbon::now()->addHours(4));
+        }
+        $cache = Cache::get('home');
         return view('musicon/index', [
             'title' => 'Home | The Musicon',
-            'message' => Session::get('message') ?? null,
-            'albums' => Spotify::new_albums(10, 0, $access_token)->albums->items,
-            'tracks' => Spotify::get_top('artists', 12, $access_token)->tracks,
-            'new_track' => Spotify::get_track(null, true, $access_token),
-            'new_releases' => Spotify::new_releases(6, 0, $access_token)->albums->items,
-            'top_tracks' => Spotify::get_top('tracks', 6, $access_token)->tracks,
-            'top_artists' => Spotify::get_top('artists', 6, $access_token)->tracks
+            'albums' => $cache['albums'],
+            'tracks' => $cache['tracks'],
+            'new_track' => $cache['new_track'],
+            'new_releases' => $cache['new_releases'],
+            'top_tracks' => $cache['top_tracks'],
+            'top_artists' => $cache['top_artists'],
         ]);
     }
     public function albums() {
@@ -36,7 +47,6 @@ class WebController extends Controller
             Spotify::new_albums(18, 0)->albums->items;
         return view('musicon/albums', [
             'title' => 'Albums | The Musicon',
-            'message' => Session::get('message') ?? null,
             'albums' => $albums
         ]);
     }
@@ -49,32 +59,27 @@ class WebController extends Controller
     public function events() {
         return view('musicon/events', [
             'title' => 'Events | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
     public function news() {
         return view('musicon/news', [
             'title' => 'News | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
     public function contacts() {
         return view('musicon/contacts', [
             'title' => 'Contact | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
     public function elements() {
         return view('musicon/elements', [
             'title' => 'Elements | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
 
     public function sign_in_view() {
         return view('musicon/sign-in', [
             'title' => 'Sign in | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
 
@@ -91,7 +96,6 @@ class WebController extends Controller
     public function sign_up_view() {
         return view('musicon/sign-up', [
             'title' => 'Sign up | The Musicon',
-            'message' => Session::get('message') ?? null
         ]);
     }
 
@@ -110,7 +114,7 @@ class WebController extends Controller
         ]);
         Mail::to($user['user_email'])->send(new VerifyEmail($user, $token));
         return redirect('/sign-in')->with('message', [
-            'content' => 'Complete your registration by confirming your email',
+            'content' => 'Complete your registration by verifying your email',
             'type' => 'success'
         ]);
     }
@@ -123,7 +127,10 @@ class WebController extends Controller
     public function verify($token) {
         $db_token = Token::where('token', $token)->first();
         if (isset($db_token) && $db_token->usage == 0) {
-            $user = User::find($db_token->user_id)->update(['user_status' => 2]);
+            $user = User::find($db_token->user_id)->update([
+                'user_status' => 2,
+                'email_verified_at' => date('Y-m-d H:i:s')
+            ]);
             Token::find($db_token->id)->delete();
             return redirect('/sign-in')
                 ->with('message', [

@@ -74,6 +74,24 @@ class Spotify
         return $access_token;
     }
 
+    public static function authorize_token($response_type, $scope, $redirect_uri) {
+        $query = [];
+        $query['client_id'] = env('SPOTIFY_CLIENT_ID');
+        $query['response_type'] = $response_type;
+        $query['scope'] = self::get_scopes($scope);
+        $query['redirect_uri'] = $redirect_uri;
+
+        $options = [
+            CURLOPT_URL => "https://accounts.spotify.com/authorize?".http_build_query($query),
+            CURLOPT_FOLLOWLOCATION => true,   // follow redirects
+//            CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode($client_id . ':' . $client_secret)],
+        ];
+//        dd($options);
+        $ch = curl_init();
+        curl_setopt_array($ch, $options);
+        return curl_exec($ch);
+    }
+
     private static function m_curl_exec($url, $access_token) {
         $options = [
             CURLOPT_URL => $url,

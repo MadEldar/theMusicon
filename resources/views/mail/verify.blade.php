@@ -494,7 +494,7 @@
                                                                       style="border-style:solid;border-color:#CCAD53;background:#2CB543;border-width:0px;display:inline-block;border-radius:0px;width:auto;"><a
                                                                         href="{{ url("/verify/$token->token") }}/"
                                                                         class="es-button" target="_blank"
-                                                                        style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#FFFFFF;border-style:solid;border-color:#23AF92;border-width:10px 20px;display:inline-block;background:#23AF92;border-radius:0px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;">Confirm my email</a></span>
+                                                                        style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#FFFFFF;border-style:solid;border-color:#23AF92;border-width:10px 20px;display:inline-block;background:#23AF92;border-radius:0px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;">Verify my email</a></span>
                                                             </td>
                                                         </tr>
                                                     </table>

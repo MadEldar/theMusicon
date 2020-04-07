@@ -15,8 +15,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/administrator')}}">
-                <span class="menu-title">Dashboard</span>
+            <a class="nav-link" href="{{url('/')}}">
+                <span class="menu-title">Back to website</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
@@ -29,8 +29,8 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/artist')}}"> Artist </a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/albums')}}"> Albums </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/users')}}">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/administrator/albums')}}">Albums</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/administrator/song')}}"> Song </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> Page 4 </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> Page 5 </a></li>
@@ -38,18 +38,18 @@
             </div>
         </li>
         <li class="nav-item sidebar-actions">
-      <span class="nav-link">
-        <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
-        <div class="mt-4">
-          <div class="border-bottom">
-            <p class="text-secondary">Categories</p>
-          </div>
-          <ul class="gradient-bullet-list mt-4">
-            <li>Free</li>
-            <li>Pro</li>
-          </ul>
-        </div>
-      </span>
+            <span class="nav-link">
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
+                <div class="mt-4">
+                    <div class="border-bottom">
+                        <p class="text-secondary">Categories</p>
+                    </div>
+                    <ul class="gradient-bullet-list mt-4">
+                        <li>Free</li>
+                        <li>Pro</li>
+                    </ul>
+                </div>
+            </span>
         </li>
     </ul>
 </nav>

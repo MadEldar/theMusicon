@@ -13376,3 +13376,8 @@ dl {
   flex-grow: 1; }
 
 /*# sourceMappingURL=style.css.map */
+
+/*# User's custom */
+select.form-control {
+    color: #495057;
+}

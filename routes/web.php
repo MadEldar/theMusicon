@@ -29,9 +29,12 @@ Route::get('/sign-out', 'WebController@sign_out');
 Route::get('/verify/{token}', 'WebController@verify');
 
 //Admin
-Route::get('/administrator', 'AdminController@admin');
+Route::get('/administrator', 'AdminController@dashboard');
 Route::get('/administrator/table', 'AdminController@table');
-Route::get('/administrator/artist', 'AdminController@artist');
+Route::get('/administrator/users', 'AdminController@users');
+Route::post('/administrator/users/edit', 'AdminController@user_edit');
 Route::get('/administrator/albums', 'AdminController@albums');
 Route::get('/administrator/song', 'AdminController@song');
 
+//API
+Route::post('/get-access-token', 'WebAPI@player_access_token');
