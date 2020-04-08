@@ -132,7 +132,7 @@ class Spotify
      * @param $type string Between artists, genres and tracks
      * @param $limit int Number of items
      */
-    public static function get_top($type, $limit = 10, $access_token = null) {
+    public static function get_top($type, $limit = 10, $offset = 0, $access_token = null) {
         $query = http_build_query([
             'limit' => $limit,
             'market' => 'US',
@@ -143,20 +143,25 @@ class Spotify
         return self::m_curl_exec($url, $access_token);
     }
 
+    public static function get_artists($ids, $access_token = null) {
+        $url = 'https://api.spotify.com/v1/artists?ids='.implode(',', $ids);
+        return self::m_curl_exec($url, $access_token);
+    }
+
     public static function new_albums($limit = 10, $offset = 0, $access_token = null) {
         $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
+        return self::m_curl_exec($url, $access_token);
+    }
+
+    public static function new_releases($limit = 10, $offset = 0, $access_token) {
+        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
+
         return self::m_curl_exec($url, $access_token);
     }
 
     public static function get_track($id, $rand = false, $access_token = null) {
         $url = "https://api.spotify.com/v1/tracks/".
             ($rand?self::seeds['tracks'][array_rand(self::seeds['tracks'])]:$id);
-
-        return self::m_curl_exec($url, $access_token);
-    }
-
-    public static function new_releases($limit = 10, $offset = 0, $access_token) {
-        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
 
         return self::m_curl_exec($url, $access_token);
     }

@@ -1851,4 +1851,9 @@ button:focus {
     border: 2px solid #000000;
 }
 
+.single-album img {
+    height: 160px;
+    object-fit: cover;
+}
+
 /*# sourceMappingURL=style.css.map */

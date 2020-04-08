@@ -22,11 +22,11 @@ class WebController extends Controller
             $cache = [];
             $access_token = Spotify::get_access_token();
             $cache['albums'] = Spotify::new_albums(10, 0, $access_token)->albums->items;
-            $cache['tracks'] = Spotify::get_top('artists', 12, $access_token)->tracks;
+            $cache['tracks'] = Spotify::get_top('artists', 12, 0, $access_token)->tracks;
             $cache['new_track'] = Spotify::get_track(null, true, $access_token);
             $cache['new_releases'] = Spotify::new_releases(6, 0, $access_token)->albums->items;
-            $cache['top_tracks'] = Spotify::get_top('tracks', 6, $access_token)->tracks;
-            $cache['top_artists'] = Spotify::get_top('artists', 6, $access_token)->tracks;
+            $cache['top_tracks'] = Spotify::get_top('tracks', 6, 0, $access_token)->tracks;
+            $cache['top_artists'] = Spotify::get_top('artists', 6, 0, $access_token)->tracks;
             Cache::put('home', $cache, Carbon::now()->addHours(4));
         }
         $cache = Cache::get('home');
@@ -39,6 +39,36 @@ class WebController extends Controller
             'top_tracks' => $cache['top_tracks'],
             'top_artists' => $cache['top_artists'],
         ]);
+    }
+    public function artists() {
+        if (!isset($_GET['q'])) $_GET['q'] = 'all';
+        if ($_GET['q'] != 'all') {
+            $artists = Spotify::search($_GET['q'], 'artist', 18, 0)->artists->items;
+        } else {
+            $artists = array_map(
+                fn($track) => $track->artists[0],
+                Spotify::get_top('artists', 18, 0)->tracks
+            );
+            $unique = array_unique(array_map(fn($artist) => $artist->id, $artists));
+            $artists = Spotify::get_artists($unique)->artists;
+        }
+        return view('musicon/artists', [
+            'title' => 'Artists | The Musicon',
+            'artists' => $artists
+        ]);
+    }
+    public function more_artists(Request $req) {
+        if ($req->get('q') != 'all') {
+            $artists = Spotify::search($req->get('q'), 'artist', 18, $req->get('offset'))->artists->items;
+        } else {
+            $artists = array_map(
+                fn($track) => $track->artists[0],
+                Spotify::get_top('artists', 18, $req->get('offset'))->tracks
+            );
+            $unique = array_unique(array_map(fn($artist) => $artist->id, $artists));
+            $artists = Spotify::get_artists($unique)->artists;
+        }
+        return $artists;
     }
     public function albums() {
         if (!isset($_GET['q'])) $_GET['q'] = 'all';
