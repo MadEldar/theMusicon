@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 //Home
 Route::get('/', 'WebController@home');
+Route::get('/artists', 'WebController@artists');
+Route::post('/more-artists', 'WebController@more_artists');
 Route::get('/albums', 'WebController@albums');
 Route::post('/more-albums', 'WebController@more_albums');
 
