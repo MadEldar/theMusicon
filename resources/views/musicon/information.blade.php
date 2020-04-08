@@ -13,109 +13,124 @@
 <!-- ##### Breadcumb Area Start ##### -->
 <section class="breadcumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcumb3.jpg');">
     <div class="bradcumbContent">
-        <p>See what’s new</p>
-        <h2>Player Music</h2>
+        <p>Your Information</p>
+        <img src="https://loremflickr.com/70/70" alt="" style = "    border: 1px solid white; border-radius: 20px; margin-bottom: 10px;">
+        <button type="button" data-toggle="modal" data-target="#editInfor" style="border:none; font-size: 25px">
+            <h2>Name</h2>
+        </button>
     </div>
 </section>
 <!-- ##### Breadcumb Area End ##### -->
 
-<!-- ##### Song Area Start ##### -->
-<div class="one-music-songs-area mb-70 section-padding-100">
+<!-- ##### Blog Area Start ##### -->
+<div class="blog-area" >
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-3" style="padding: 50px 0;">
+                <div class="blog-sidebar-area">
 
-                <div class="col-8 m-0">
-                    <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="100%" height="151px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                </div>
-                <div class="col-4">
-                    <ul>
-                        <li>
-                            <div>
-                                <a href=""></a>
-                                <h1>HIHI</h1>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Single Song Area -->
-            <div class="col-12">
-                <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
-                    <div class="song-thumbnail">
-                        <img src="{{asset('musicon/img/bg-img/s1.jpg')}}" alt="">
-                    </div>
-                    <div class="song-play-area">
-                        <div class="song-name">
-                            <p>01. Main Hit Song</p>
+                    <!-- Widget Area -->
+                    <div class="single-widget-area mb-30">
+                        <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; padding: 40px 40px 0">
+                        <div class="widget-title">
+                            <h5>Name</h5>
                         </div>
-                        <audio preload="auto" controls>
-                            <source src="{{asset('audio/dummy-audio.mp3')}}">
-                        </audio>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Song Area -->
-            <div class="col-12">
-                <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
-                    <div class="song-thumbnail">
-                        <img src="{{asset('musicon/img/bg-img/s2.jpg')}}" alt="">
-                    </div>
-                    <div class="song-play-area">
-                        <div class="song-name">
-                            <p>01. Main Hit Song</p>
+                        <div class="widget-content">
+                            <ul>
+                                <li><a href="#">Account ---------------------------------></a></li>
+                                <li><a href="#">Favorite</a></li>
+                                <li><a href="#">Playlist</a></li>
+                                <li><a href="#">Sign out</a></li>
+                            </ul>
                         </div>
-                        <audio preload="auto" controls>
-                            <source src="{{asset('audio/dummy-audio.mp3')}}">
-                        </audio>
+                    </div>
+                    <!-- Widget Area -->
+                    <div class="single-widget-area mb-30">
+                        <a href="#"><img src="{{asset('musicon/img/bg-img/add.gif')}}" alt=""></a>
                     </div>
                 </div>
             </div>
 
-            <!-- Single Song Area -->
-            <div class="col-12">
-                <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
-                    <div class="song-thumbnail">
-                        <img src="{{asset('musicon/img/bg-img/s3.jpg')}}" alt="">
-                    </div>
-                    <div class="song-play-area">
-                        <div class="song-name">
-                            <p>01. Main Hit Song</p>
+            <div class="col-9" style="padding: 50px;">
+                <h3>Manage Account</h3>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div style="border: 0.5px solid black; margin-bottom: 10px; ">
+                            <h2>Information</h2>
+                            <hr class="m-0">
+                            <p>Name:</p>
+                            <p>Birth of date:</p>
+                            <p>Phone:</p>
+                            <p>Gender:</p>
                         </div>
-                        <audio preload="auto" controls>
-                            <source src="{{asset('audio/dummy-audio.mp3')}}">
-                        </audio>
                     </div>
-                </div>
-            </div>
-
-            <!-- Single Song Area -->
-            <div class="col-12">
-                <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
-                    <div class="song-thumbnail">
-                        <img src="{{asset('musicon/img/bg-img/s4.jpg')}}" alt="">
-                    </div>
-                    <div class="song-play-area">
-                        <div class="song-name">
-                            <p>01. Main Hit Song</p>
+                    <div class="col-6">
+                        <div style="border: 0.5px solid black;margin-bottom: 10px;">
+                            <h2>Account </h2>
+                            <hr class="m-0">
+                            <p>Username: </p>
+                            <p>Email: </p>
+                            <p>Password: </p>
                         </div>
-                        <audio preload="auto" controls>
-                            <source src="{{asset('audio/dummy-audio.mp3')}}">
-                        </audio>
+                    </div>
+                    <div class="col-6">
+                        <div style="border: 0.5px solid black">
+                            <h2>Playlist </h2>
+                            <hr class="m-0">
+                            <a href="#"><img src="{{asset('musicon/img/bg-img/add.gif')}}" alt="" style="padding: 20px"></a>
+
+                        </div>
+                    </div>
+                    <div class="col-6" >
+                        <div style="border: 0.5px solid black">
+                            <h2>Favorite </h2>
+                            <hr class="m-0">
+                            <a href="#"><img src="{{asset('musicon/img/bg-img/add.gif')}}" alt="" style="padding: 20px"></a>
+x
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-<!-- ##### Song Area End ##### -->
 
-<!-- ##### Contact Area Start ##### -->
-@include('musicon/partials/contact')
-<!-- ##### Contact Area End ##### -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="editInfor" tabindex="-1" role="dialog" aria-labelledby="editInfor" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editInfor">Edit profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Username: theMusicon</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-gradient-dark">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ##### Blog Area End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
 @include('musicon/partials/footer')
