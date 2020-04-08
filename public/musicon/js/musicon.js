@@ -37,35 +37,42 @@ $('#alert-container').on('mouseout', '.alert', () => {
     removeInterval = setInterval(removeMessage, 4500);
 });
 
-$('#more-albums').on('click', () => {
+$('.load-more-btn').on('click', 'button', function () {
+    let target = $(this).attr('data-target');
+    let offset = parseInt($(this).attr('data-offset'));
+    $(this).attr('data-offset', offset + 18);
     $.ajax({
-        url: '/more-albums',
+        url: `/more-${target}`,
         type: 'post',
         data: {
             q: new URLSearchParams(window.location.search).get('q') ?? 'all',
-            offset: $('.single-album-item').length,
+            offset: offset + 18,
             _token: $('input[name="_token"]').val()
         },
         success: function(data) {
-            console.log(data);
-            data.forEach((album) => {
+            data.forEach((datum) => {
                 $('.oneMusic-albums').append(`
                     <!-- Single Album -->
                     <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t c p">
                         <div class="single-album">
-                            <img src="${ album.images[1].url }" alt="">
+                            <img src="${ datum.images[1] ? datum.images[1].url : asset_path('/musicon/img/bg-img/artist-default.png')}" alt="">
                             <div class="album-info">
                                 <a href="#">
-                                    <h5>${ album.name }</h5>
+                                    <h5>${ datum.name }</h5>
                                 </a>
-                                <p>${ album.artists[0].name }</p>
+                                ${ datum.artists ? '<p>'+datum.artists[0].name+'</p>':'' }
                             </div>
                         </div>
                     </div>
                 `);
             });
+            if (data.length == 0) {
+                $('.load-more-btn').html(`
+                    <p>No more albums</p>
+                `);
+            }
         }
-    })
+    });
 });
 
 let player;

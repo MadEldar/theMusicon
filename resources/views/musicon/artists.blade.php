@@ -15,7 +15,7 @@
     <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb3.jpg');">
         <div class="breadcrumbContent">
             <p>See what’s new</p>
-            <h2>Latest Albums</h2>
+            <h2>Popular artists</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="/albums" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
+                    <form action="/artists" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
                         <button type="submit" name="q" value="All" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</button>
                         @foreach(range('A', 'Z') as $val)
                         <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</button>
@@ -37,16 +37,15 @@
                 </div>
             </div>
             <div class="row oneMusic-albums justify-content-center">
-                @forelse($albums as $album)
+                @forelse($artists as $artist)
                     <!-- Single Album -->
                     <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t c p">
                         <div class="single-album">
-                            <img src="{{ isset($album->images[1]) ? $album->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
+                            <img src="{{ isset($artist->images[1]) ? $artist->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
                             <div class="album-info">
                                 <a href="#">
-                                    <h5>{{ $album->name }}</h5>
+                                    <h5>{{ $artist->name }}</h5>
                                 </a>
-                                <p>{{ $album->artists[0]->name }}</p>
                             </div>
                         </div>
                     </div>
@@ -64,11 +63,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="load-more-btn text-center">
-                        @if(sizeof($albums) == 18)
-                            <button id="more-albums" data-target="albums" data-offset="0" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></button>
-                        @else
-                            <p>No more albums</p>
-                        @endif
+                        <button id="more-artists" data-target="artists" data-offset="0" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></button>
                     </div>
                 </div>
             </div>
