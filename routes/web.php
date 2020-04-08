@@ -22,7 +22,7 @@ Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
 Route::get('/player-music', 'WebController@playerMusic');
-Route::get('/artist', 'WebController@');
+Route::get('/artist', 'WebController@artist');
 
 
 //User
