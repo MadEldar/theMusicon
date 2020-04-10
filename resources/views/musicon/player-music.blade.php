@@ -328,7 +328,82 @@ chagapda yeongiro ssahin gilgeoriga
             <!-- ##### Miscellaneous Area End ##### -->
             </div>
     </section>
-</div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <h1>Comment here</h1>
+            <div class="col-12">
+                <div  style="float: left; margin-right: 15px">
+                        <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; margin-bottom: 33px">
+                </div>
+                <form action="/action_page.php" id="usrform" class="col">
+                <textarea rows="2" cols="160" placeholder="Comment by me" style="resize: none; border: outset"></textarea>
+                        <div class="col">
+                <input type="submit" style="float: right">   <p>Thank for your comment </p>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12">
+                <div  style="float: left; margin-right: 15px">
+                    <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; margin-bottom: 33px">
+                </div>
+                <div>
+                    <button type="button" data-toggle="modal" data-target="#inforUserComment" style="border:none; background: none">
+                        <p style="margin: 0">Name - Commnet content</p>
+                    </button>
+                </div>
+                <button onclick="myFunction()">Reply</button>
+                <button onclick="myFunction()">Close</button>
+
+                <div class="col-12"  id="myDIV" style="display: none; margin-top: 15px">
+                    <div>
+                        <div  style="float: left; margin-right: 15px">
+                            <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; margin-bottom: 33px">
+                        </div>
+                        <form action="/action_page.php" id="usrform" class="col" >
+                            <textarea rows="2" cols="148" placeholder="Comment" style="resize: none; border: outset"></textarea>
+                            <div class="col">
+                                <input type="submit" style="float: right">   <p>Thank for your comment </p>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="margin-left: 43px">
+                        <div  style="float: left; margin-right: 15px">
+                            <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; margin-bottom: 33px">
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#inforUserComment" style="border:none; background: none">
+
+                            <p style="margin: 0">Name - Comment content</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="inforUserComment" tabindex="-1" role="dialog" aria-labelledby="inforUserComment" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inforUserComment">Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://loremflickr.com/40/40" alt="" style = "border: 1px solid white; border-radius: 20px; margin-bottom: 33px">
+                    <p>Name: </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- ##### Featured Artist Area End ##### -->
     <section class="latest-albums-area " style="margin-bottom: 50px">
         <div class="container">
@@ -593,7 +668,22 @@ chagapda yeongiro ssahin gilgeoriga
                 </div>
             </div>
         </div>
-    <!-- ##### Contact Area Start ##### -->
+
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+
+
+        <!-- ##### Contact Area Start ##### -->
     @include('musicon/partials/contact')
     <!-- ##### Contact Area End ##### -->
 

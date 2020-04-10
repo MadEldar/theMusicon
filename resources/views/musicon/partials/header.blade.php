@@ -10,6 +10,14 @@
                     <ul >
                         <li><a href="{{url('/')}}" style="color: #23AF92; font-size: 20px; font-weight:bold ;">The Musicon</a></li>
                     </ul>
+
+
+                    <!-- Search form -->
+                    <form class="form-inline d-flex justify-content-center md-form form-sm active-green active-green-2 mt-2">
+                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                               aria-label="Search">
+                    </form>
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
                         <span class="navbarToggler"><span></span><span></span><span></span></span>

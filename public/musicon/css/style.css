@@ -1807,3 +1807,29 @@ img {
 /* ====== The End ====== */
 
 /*# sourceMappingURL=style.css.map */
+
+/*search*/
+
+.active-green-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid  #23AF92;
+    box-shadow: 0 1px 0 0  #23AF92;
+}
+.active-green input.form-control[type=text] {
+    border-bottom: 1px solid  #23AF92;
+    box-shadow: 0 1px 0 0  #23AF92;
+}
+.active-green .fa, .active-green-2 .fa {
+    color: #23AF92;
+}
+
+.active-black-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid  #000;
+    box-shadow: 0 1px 0 0  #000;
+}
+.active-black input.form-control[type=text] {
+    border-bottom: 1px solid  #000;
+    box-shadow: 0 1px 0 0  #000;
+}
+.active-black .fa, .active-black-2 .fa {
+    color: #000;
+}

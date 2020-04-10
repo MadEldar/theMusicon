@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-70">
+                    <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-30 ml-30">
                         <a href="#" data-filter="*">Browse All</a>
                         <a href="#" data-filter=".a" class="active">A</a>
                         <a href="#" data-filter=".b">B</a>
@@ -55,7 +55,14 @@
                         <a href="#" data-filter=".z">Z</a>
                         <a href="#" data-filter=".number">0-9</a>
                     </div>
+                    <!-- Search form -->
+                    <form class="form-inline d-flex justify-content-center md-form form-sm active-black active-black-2 mb-50 ml-3">
+                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <input class="form-control form-control-sm ml-4" style="width: 90%" type="text" placeholder="Search"
+                               aria-label="Search">
+                    </form>
                 </div>
+
             </div>
 
             <div class="row oneMusic-albums">
