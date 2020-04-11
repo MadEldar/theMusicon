@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Genius;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
+use App\LastFM;
 use App\Mail\VerifyEmail;
 use App\Spotify;
 use App\Token;
@@ -21,9 +23,8 @@ class WebController extends Controller
         if (!Cache::has('home')) {
             $cache = [];
             $access_token = Spotify::get_access_token();
-            $cache['albums'] = Spotify::new_albums(10, 0, $access_token)->albums->items;
+            $cache['albums'] = Spotify::new_releases(10, 0, $access_token)->albums->items;
             $cache['tracks'] = Spotify::get_top('artists', 12, 0, $access_token)->tracks;
-            $cache['new_track'] = Spotify::get_track(null, true, $access_token);
             $cache['new_releases'] = Spotify::new_releases(6, 0, $access_token)->albums->items;
             $cache['top_tracks'] = Spotify::get_top('tracks', 6, 0, $access_token)->tracks;
             $cache['top_artists'] = Spotify::get_top('artists', 6, 0, $access_token)->tracks;
@@ -34,20 +35,32 @@ class WebController extends Controller
             'title' => 'Home | The Musicon',
             'albums' => $cache['albums'],
             'tracks' => $cache['tracks'],
-            'new_track' => $cache['new_track'],
+            'new_track' => Spotify::find_track(null, true),
             'new_releases' => $cache['new_releases'],
             'top_tracks' => $cache['top_tracks'],
             'top_artists' => $cache['top_artists'],
         ]);
     }
+    public function genres() {
+        if (!isset($_GET['q'])) return redirect()->back()->withErrors(['Please select a genre first']);
+        $tracks = Spotify::get_genre_tracks($_GET['q'], 24)->tracks;
+        return view('musicon/genres', [
+            'title' => 'Genres | The Musicon',
+            'tracks' => $tracks,
+            'genres' => Spotify::get_all_genres()->genres
+        ]);
+    }
+    public function more_genres(Request $req) {
+        return Spotify::get_genre_tracks($req->get('q'), 24, $req->get('offset'))->tracks;
+    }
     public function artists() {
         if (!isset($_GET['q'])) $_GET['q'] = 'all';
         if ($_GET['q'] != 'all') {
-            $artists = Spotify::search($_GET['q'], 'artist', 18, 0)->artists->items;
+            $artists = Spotify::search($_GET['q'], 'artist', 24, 0)->artists->items;
         } else {
             $artists = array_map(
                 fn($track) => $track->artists[0],
-                Spotify::get_top('artists', 18, 0)->tracks
+                Spotify::get_top('artists', 24, 0)->tracks
             );
             $unique = array_unique(array_map(fn($artist) => $artist->id, $artists));
             $artists = Spotify::get_artists($unique)->artists;
@@ -57,13 +70,31 @@ class WebController extends Controller
             'artists' => $artists
         ]);
     }
+    public function artist($id) {
+        $artistS = Spotify::find_artist($id);
+        $artistL = LastFM::find_artist($artistS->name)->artist;
+        $tracks = Spotify::find_artist_track($id)->tracks;
+        $albums = Spotify::find_artist_album($id)->items;
+        $unique = array_unique(array_map(fn($album) => $album->name, $albums));
+        foreach ($albums as $key=>$album) {
+            if (!isset($unique[$key])) unset($albums[$key]);
+        }
+        return view('musicon/artist-info', [
+            'title' => $artistS->name . ' | The Musicon',
+            'artistS' => $artistS,
+            'artistL' => $artistL,
+            'tracks' => $tracks,
+            'albums' => $albums,
+            'genres' => array_intersect($artistS->genres, Spotify::seeds['genres'])
+        ]);
+    }
     public function more_artists(Request $req) {
         if ($req->get('q') != 'all') {
-            $artists = Spotify::search($req->get('q'), 'artist', 18, $req->get('offset'))->artists->items;
+            $artists = Spotify::search($req->get('q'), 'artist', 24, $req->get('offset'))->artists->items;
         } else {
             $artists = array_map(
                 fn($track) => $track->artists[0],
-                Spotify::get_top('artists', 18, $req->get('offset'))->tracks
+                Spotify::get_top('artists', 24, $req->get('offset'))->tracks
             );
             $unique = array_unique(array_map(fn($artist) => $artist->id, $artists));
             $artists = Spotify::get_artists($unique)->artists;
@@ -73,8 +104,8 @@ class WebController extends Controller
     public function albums() {
         if (!isset($_GET['q'])) $_GET['q'] = 'all';
         $albums = $_GET['q'] != 'all' ?
-            Spotify::search($_GET['q'], 'album', 18, 0)->albums->items :
-            Spotify::new_albums(18, 0)->albums->items;
+            Spotify::search($_GET['q'], 'album', 24, 0)->albums->items :
+            Spotify::new_releases(24, 0)->albums->items;
         return view('musicon/albums', [
             'title' => 'Albums | The Musicon',
             'albums' => $albums
@@ -82,8 +113,24 @@ class WebController extends Controller
     }
     public function more_albums(Request $req) {
         return $req->get('q') != 'all'?
-            Spotify::search($req->get('q'), 'album', 18, $req->get('offset'))->albums->items :
-            Spotify::new_albums(18, $req->get('offset'))->albums->items;
+            Spotify::search($req->get('q'), 'album', 24, $req->get('offset'))->albums->items :
+            Spotify::new_releases(24, $req->get('offset'))->albums->items;
+    }
+    public function redirect_album() {
+        $track = Spotify::find_album($_GET['q'])->items[0];
+        return redirect('/player?track='.urlencode($track->name.' '.$track->artists[0]->name));
+    }
+    public function player() {
+        $query = preg_replace('~-~', '', $_GET['track']);
+        $track = Spotify::search($query, 'track', 1)->tracks->items[0];
+        $artist = Spotify::find_artist($track->artists[0]->id);
+        $lyrics = Genius::find_track(Genius::search($track->name, $track->artists[0]->name)->response->hits[1]->result->id)->response->song->embed_content;
+        return view('musicon/player-music', [
+            'title' => "$track->name | The Musicon",
+            'track' => $track,
+            'lyrics' => $lyrics,
+            'artist' => $artist
+        ]);
     }
 
     public function events() {

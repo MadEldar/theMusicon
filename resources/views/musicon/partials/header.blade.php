@@ -8,9 +8,10 @@
 
                     <!-- Nav brand -->
                     <div>
-                        <img src="{{ asset('musicon/img/core-img/musicon-logo.png') }}" alt="Musicon logo"
-                             style="width: 35px; height: 35px">
-                        <a href="{{url('/')}}" style="color: #23AF92; font-size: 20px; font-weight:bold ;">The Musicon</a>
+                        <a href="{{url('/')}}" style="color: #23AF92; font-size: 20px; font-weight:bold ;">
+                            <img src="{{ asset('musicon/img/core-img/musicon-logo.png') }}" alt="Musicon logo" style="width: 35px; height: 35px">
+                            The Musicon
+                        </a>
                     </div>
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -29,6 +30,13 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="#">Genres</a>
+                                    <ul class="dropdown">
+                                        @foreach(\App\Spotify::seeds['genres'] as $genre)
+                                            <li><a href="{{url("/genres?q=$genre")}}">{{ $genre }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
                                 <li><a href="{{url('/artists')}}">Artists</a></li>
                                 <li><a href="{{url('/albums')}}">Albums</a></li>
                                 <li><a href="{{url('/news')}}">News</a></li>
@@ -43,12 +51,14 @@
                                         <li><a href="{{url('/news')}}">News</a></li>
                                         <li><a href="{{url('/contacts')}}">Contact</a></li>
                                         <li><a href="{{url('/elements')}}">Elements</a></li>
-                                        <li><a href="{{url('/information')}}" style="color: #23AF92">Information</a></li>
+                                        <li><a href="{{url('/information')}}" style="color: #23AF92">Information</a>
+                                        </li>
                                         @if(!Auth::check())
                                             <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
                                             <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
                                         @elseif(Auth::user()->user_role == 0)
-                                            <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a></li>
+                                            <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a>
+                                            </li>
                                         @endif
                                     </ul>
                                 </li>
@@ -84,7 +94,6 @@
                             </div>
                         </div>
                         <!-- Nav End -->
-
                     </div>
                 </nav>
             </div>

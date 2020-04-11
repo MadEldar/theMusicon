@@ -12,7 +12,7 @@
     @include('musicon/partials/header')
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb2.jpg)';">
+    <div class="breadcrumb-area bg-img bg-overlay" style="background-image: url({{ url('/musicon/img/bg-img/breadcrumb2.jpg') }});">
         <div class="breadcrumbContent">
             <p>See what’s new</p>
             <h2>Elements</h2>

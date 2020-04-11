@@ -31,7 +31,7 @@ class Spotify
         'urrp'      => 'user-read-recently-played',
         'utr'       => 'user-top-read',
     ];
-    private const seeds = [
+    const seeds = [
         'artists' => [
             '2xvW7dgL1640K8exTcRMS4',
             '6M2wZ9GZgrQXHCFfjv46we',
@@ -45,6 +45,32 @@ class Spotify
             '2qG81jL9UIP54uS8gYyP4k',
             '1raaNykBg1bDnWENUiglUA',
             '4bCuBkeVRofawnFkGu05fu'
+        ],
+        'genres' => [
+            'acoustic',
+            'alt-rock',
+            'alternative',
+            'children',
+            'classical',
+            'club',
+            'country',
+            'dance',
+            'disco',
+            'disney',
+            'dubstep',
+            'edm',
+            'electro',
+            'electronic',
+            'hard-rock',
+            'heavy-metal',
+            'hip-hop',
+            'indie',
+            'indie-pop',
+            'k-pop',
+            'pop',
+            'r-n-b',
+            'rock',
+            'rock-n-roll',
         ]
     ];
     private $access_token;
@@ -111,11 +137,11 @@ class Spotify
 
     /**
      * @param $q string Query to search
-     * @param $type string Search with type, including album, artist, playlist, track, seperated by comma
+     * @param $type string Search with types, including album, artist, playlist, track, seperated by comma
      * @param null $access_token
      * @return mixed
      */
-    public static function search($q = '', $type, $limit = 10, $offset = 0, $access_token = null) {
+    public static function search($q, $type, $limit = 10, $offset = 0, $access_token = null) {
         $query = http_build_query([
             'q' => $q,
             'type' => $type ?? implode(',', Spotify::search_types),
@@ -143,23 +169,49 @@ class Spotify
         return self::m_curl_exec($url, $access_token);
     }
 
+    public static function get_all_genres($access_token = null) {
+        return self::m_curl_exec('https://api.spotify.com/v1/recommendations/available-genre-seeds', $access_token);
+    }
+
+    public static function get_genre_tracks($genre, $limit = 10, $offset = 0, $access_token = null) {
+        return self::m_curl_exec('https://api.spotify.com/v1/recommendations?'.
+            http_build_query([
+                'seed_genres' => $genre,
+                'limit' => $limit,
+                'offset' => $offset
+            ]),
+            $access_token
+        );
+    }
+
     public static function get_artists($ids, $access_token = null) {
         $url = 'https://api.spotify.com/v1/artists?ids='.implode(',', $ids);
         return self::m_curl_exec($url, $access_token);
     }
 
-    public static function new_albums($limit = 10, $offset = 0, $access_token = null) {
-        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
-        return self::m_curl_exec($url, $access_token);
-    }
-
-    public static function new_releases($limit = 10, $offset = 0, $access_token) {
+    public static function new_releases($limit = 10, $offset = 0, $access_token = null) {
         $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
 
         return self::m_curl_exec($url, $access_token);
     }
 
-    public static function get_track($id, $rand = false, $access_token = null) {
+    public static function find_artist($id, $access_token = null) {
+        return self::m_curl_exec("https://api.spotify.com/v1/artists/$id", $access_token);
+    }
+
+    public static function find_artist_track($id, $limit = 10, $offset = 0, $access_token = null) {
+        return self::m_curl_exec("https://api.spotify.com/v1/artists/$id/top-tracks?market=vn", $access_token);
+    }
+
+    public static function find_artist_album($id, $access_token = null) {
+        return self::m_curl_exec("https://api.spotify.com/v1/artists/$id/albums", $access_token);
+    }
+
+    public static function find_album($id, $access_token = null) {
+        return self::m_curl_exec("https://api.spotify.com/v1/albums/$id/tracks", $access_token);
+    }
+
+    public static function find_track($id, $rand = false, $access_token = null) {
         $url = "https://api.spotify.com/v1/tracks/".
             ($rand?self::seeds['tracks'][array_rand(self::seeds['tracks'])]:$id);
 

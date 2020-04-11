@@ -3,7 +3,7 @@
         <div class="row d-flex flex-wrap align-items-center">
             <div class="col-12 col-md-6">
                 <ul >
-                    <li><a href="{{url('/')}}"   style="color: #23AF92; font-size: 20px; font-weight:bold ;">The Musicon</a></li>
+                    <li><a href="{{url('#top')}}"   style="color: #23AF92; font-size: 20px; font-weight:bold ;">The Musicon</a></li>
                 </ul>
                 <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         @csrf

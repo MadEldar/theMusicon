@@ -15,43 +15,42 @@
     <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url({{ asset('/musicon/img/bg-img/breadcrumb3.jpg') }});">
         <div class="breadcrumbContent">
             <p>See what’s new</p>
-            <h2>Popular artists</h2>
+            <h2>Popular in this genre</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Album Catagory Area Start ##### -->
     <section class="album-category section-padding-100-0">
-        <div class="container">
+        <div class="col-10 offset-1">
             <div class="row">
-                <div class="col-12">
-                    <form action="{{ url('/artists') }}" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
-                        <button type="submit" name="q" value="All" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</button>
-                        @foreach(range('A', 'Z') as $val)
+                <div class="col-3">
+                    <form action="{{ url('/genres')}}" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
+                        @foreach($genres as $val)
                         <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</button>
-                        @endforeach
-                        @foreach(range('0', '9') as $val)
-                        <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val && $_GET['q'] != 0) class="active" @endif>{{$val}}</button>
                         @endforeach
                     </form>
                 </div>
-            </div>
-            <div class="row oneMusic-albums justify-content-center">
-                @forelse($artists as $artist)
-                    <!-- Single Album -->
-                    <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t c p">
-                        <div class="single-album">
-                            <img src="{{ isset($artist->images[1]) ? $artist->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
-                            <div class="album-info">
-                                <a href="#">
-                                    <h5>{{ $artist->name }}</h5>
-                                </a>
+                <div class="col-9">
+                    <div class="row oneMusic-albums justify-content-center">
+                        @forelse($tracks as $track)
+                            <!-- Single Album -->
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t c p">
+                                <div class="single-album">
+                                    <img src="{{ isset($track->album->images[1]) ? $track->album->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
+                                    <div class="album-info">
+                                        <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                            <h5>{{ $track->name }}</h5>
+                                        </a>
+                                        <p>{{ $track->artists[0]->name }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @empty
+                            <h4 class="text-center">No matching track</h4>
+                        @endforelse
                     </div>
-                @empty
-                    <h4 class="text-center">No matching album</h4>
-                @endforelse
+                </div>
             </div>
         </div>
     </section>
@@ -63,7 +62,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="load-more-btn text-center">
-                        <button id="more-artists" data-target="artists" data-offset="0" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></button>
+                        <button id="more-genres" data-target="genres" data-offset="0" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></button>
                     </div>
                 </div>
             </div>
