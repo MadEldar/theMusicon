@@ -19,7 +19,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url('musicon/img/bg-img/bg-1.jpg');"></div>
+                <div class="slide-img bg-img" style="background-image: url({{ asset('/musicon/img/bg-img/bg-1.jpg') }});"></div>
                 <!-- Slide Content -->
                 <div class="container">
                     <div class="row">
@@ -69,7 +69,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-9">
                     <div class="ablums-text text-center mb-70">
-                        <p>Nam tristique ex vel magna tincidunt, ut porta nisl finibus. Vivamus eu dolor eu quam varius rutrum. Fusce nec justo id sem aliquam fringilla nec non lacus. Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
+                        <p>View the latest trending albums on Spotify.</p>
                     </div>
                 </div>
             </div>
@@ -82,10 +82,10 @@
                         <div class="single-album">
                             <img src="{{ $album->images[1]->url }}" alt="">
                             <div class="album-info">
-                                <a href="#">
-                                    <h5>{{ $album->artists[0]->name }}</h5>
+                                <a href="{{ url("/album?q=$album->id") }}">
+                                    <h5>{{ $album->name }}</h5>
                                 </a>
-                                <p>{{ $album->name }}</p>
+                                <p>{{ $album->artists[0]->name }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -128,10 +128,10 @@
                                 @endif
                             </div>
                             <div class="album-info">
-                                <a href="#">
-                                    <h5>{{ $track->artists[0]->name }}</h5>
+                                <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                    <h5>{{ $track->name }}</h5>
                                 </a>
-                                <p>{{ $track->name }}</p>
+                                <p>{{ $track->artists[0]->name }}</p>
                             </div>
                         </div>
                     </div>
@@ -162,12 +162,14 @@
                         <!-- Section Heading -->
                         <div class="section-heading white text-left mb-30">
                             <p>See what’s new</p>
-                            <h2>Try new</h2>
+                            <h2>Try a random new song</h2>
                         </div>
-                        <p>Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>{{ $new_track->name }}</p>
+                                <a href="{{ url('/player?track='.urlencode($new_track->name.' '.$new_track->artists[0]->name)) }}"
+                                    class="text-white-50">
+                                    {{ $new_track->name }} - {{ $new_track->artists[0]->name }}
+                                </a>
                             </div>
                             <iframe src="{{ $new_track->preview_url }}" frameborder="0"></iframe>
                         </div>
@@ -195,8 +197,8 @@
                                     <img style="width:75px" src="{{ $album->images[2]->url }}" alt="">
                                 </div>
                                 <div class="content-">
-                                    <h6>{{ $album->artists[0]->name }}</h6>
-                                    <p>{{ $album->name }}</p>
+                                    <h6><a href="{{ url("/album?q=$album->id") }}">{{ $album->name }}</a></h6>
+                                    <p>{{ $album->artists[0]->name }}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -217,8 +219,12 @@
                                         <img style="width:75px" src="{{ $track->album->images[2]->url }}" alt="">
                                     </div>
                                     <div class="content-">
-                                        <h6>{{ $track->artists[0]->name }}</h6>
-                                        <p>{{ $track->name }}</p>
+                                        <h6>
+                                            <a href="{{ url('/player?track='.urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                                {{ $track->name }}
+                                            </a>
+                                        </h6>
+                                        <p>{{ $track->artists[0]->name }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -239,7 +245,7 @@
                                 <img style="width:75px" src="{{ $track->album->images[1]->url }}" alt="">
                             </div>
                             <div class="content-">
-                                <p>{{ $track->artists[0]->name }}</p>
+                                <a href="{{ url('/artist/'.$track->artists[0]->id) }}">{{ $track->artists[0]->name }}</a>
                             </div>
                         </div>
                         @endforeach

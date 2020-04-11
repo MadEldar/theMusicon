@@ -124,10 +124,20 @@
         $('.video--play--btn').magnificPopup({
             disableOn: 0,
             type: 'iframe',
-            mainClass: 'mfp-fade',
+            mainClass: 'mfp-fade mfp-no-margins mfp-with-zoom',
             removalDelay: 160,
             preloader: true,
-            fixedContentPos: false
+            // fixedContentPos: false
+            closeBtnInside: false,
+            fixedContentPos: true,
+            // mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300 // don't foget to change the duration also in CSS
+            }
         });
     }
 

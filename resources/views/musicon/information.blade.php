@@ -11,7 +11,7 @@
 @include('musicon/partials/header')
 
 <!-- ##### Breadcumb Area Start ##### -->
-<section class="breadcumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcumb3.jpg');">
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url({{ asset('/musicon/img/bg-img/breadcumb3.jpg') }});">
     <div class="bradcumbContent">
         <p>See what’s new</p>
         <h2>Player Music</h2>

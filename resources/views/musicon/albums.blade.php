@@ -12,7 +12,7 @@
     @include('musicon/partials/header')
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url('musicon/img/bg-img/breadcrumb3.jpg');">
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url({{ asset('/musicon/img/bg-img/breadcrumb3.jpg') }});">
         <div class="breadcrumbContent">
             <p>See what’s new</p>
             <h2>Latest Albums</h2>
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="/albums" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
+                    <form action="{{ url('/albums') }}" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
                         <button type="submit" name="q" value="All" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</button>
                         @foreach(range('A', 'Z') as $val)
                         <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</button>
@@ -43,7 +43,7 @@
                         <div class="single-album">
                             <img src="{{ isset($album->images[1]) ? $album->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
                             <div class="album-info">
-                                <a href="#">
+                                <a href="{{ url("/album?q=$album->id") }}">
                                     <h5>{{ $album->name }}</h5>
                                 </a>
                                 <p>{{ $album->artists[0]->name }}</p>
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="load-more-btn text-center">
-                        @if(sizeof($albums) == 18)
+                        @if(sizeof($albums) == 24)
                             <button id="more-albums" data-target="albums" data-offset="0" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></button>
                         @else
                             <p>No more albums</p>

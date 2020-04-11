@@ -14,16 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 //Home
 Route::get('/', 'WebController@home');
-Route::get('/albums', 'WebController@albums');
-Route::post('/more-artists', 'WebController@more_artists');
+Route::get('/genres', 'WebController@genres');
+Route::post('/more-genres', 'WebController@more_genres');
 Route::get('/artists', 'WebController@artists');
+Route::get('/artist/{id}', 'WebController@artist');
+Route::post('/more-artists', 'WebController@more_artists');
+Route::get('/albums', 'WebController@albums');
+Route::get('/album', 'WebController@redirect_album');
 Route::post('/more-albums', 'WebController@more_albums');
+Route::get('/player', 'WebController@player');
 
 Route::get('/events', 'WebController@events');
 Route::get('/news', 'WebController@news');
 Route::get('/contacts', 'WebController@contacts');
 Route::get('/elements', 'WebController@elements');
-Route::get('/player-music', 'WebController@playerMusic');
 
 //User
 Route::get('/information', "UserController@information");
