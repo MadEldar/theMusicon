@@ -25,9 +25,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="hero-slides-content text-center">
-                                <h6 data-animation="fadeInUp" data-delay="100ms">Latest album</h6>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Beyond Time <span>Beyond Time</span></h2>
-                                <a data-animation="fadeInUp" data-delay="500ms" href="#" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
+                                <h6 data-animation="fadeInUp" data-delay="100ms">The Musicon</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">Explore music <span>Explore music</span></h2>
+                                <a data-animation="fadeInUp" data-delay="500ms" href="#main" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="hero-slides-content text-center">
-                                <h6 data-animation="fadeInUp" data-delay="100ms">Latest album</h6>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Colorlib Music <span>Colorlib Music</span></h2>
-                                <a data-animation="fadeInUp" data-delay="500ms" href="#" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
+                                <h6 data-animation="fadeInUp" data-delay="100ms">The Musicon</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">Latest trends <span>Latest trends</span></h2>
+                                <a data-animation="fadeInUp" data-delay="500ms" href="#main" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
     <!-- ##### Hero Area End ##### -->
 
     <!-- ##### Latest Albums Area Start ##### -->
-    <section class="latest-albums-area section-padding-100">
+    <section class="latest-albums-area section-padding-100" id="main">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -104,7 +104,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading style-2">
-                        <p>See what’s new</p>
                         <h2>Recommended tracks</h2>
                     </div>
                 </div>
@@ -164,7 +163,6 @@
                     <div class="featured-artist-content">
                         <!-- Section Heading -->
                         <div class="section-heading white text-left mb-30">
-                            <p>See what’s new</p>
                             <h2>Try a random new song</h2>
                         </div>
                         <div class="song-play-area">
@@ -255,8 +253,8 @@
                         @foreach($top_artists as $track)
                         <!-- Single Artist -->
                         <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="100ms">
-                            <div class="thumbnail" style="width:75px">
-                                <img style="width:75px" src="{{ $track->album->images[1]->url }}" alt="">
+                            <div class="thumbnail">
+                                <img style="width:75px;max-width:75px;" src="{{ $track->album->images[1]->url }}" alt="">
                             </div>
                             <div class="content-">
                                 <a href="{{ url('/artist/'.$track->artists[0]->id) }}">{{ $track->artists[0]->name }}</a>

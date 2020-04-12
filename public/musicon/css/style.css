@@ -1109,10 +1109,10 @@ img {
       margin-bottom: 0; }
     .popular-artists-area .single-artists .thumbnail {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 63px;
-      flex: 0 0 63px;
-      max-width: 63px;
-      width: 63px;
+      -ms-flex: 0 0 75px;
+      flex: 0 0 75px;
+      max-width: 75px;
+      width: 75px;
       margin-right: 20px;
       border-radius: 50%; }
       .popular-artists-area .single-artists .thumbnail img {
@@ -2017,4 +2017,8 @@ pre a, pre a:hover {
     line-height: 1;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+html {
+    scroll-behavior: smooth;
 }
