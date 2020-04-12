@@ -148,10 +148,16 @@
     <!-- ##### Featured Artist Area Start ##### -->
     <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:url('musicon/img/bg-img/bg-4.jpg');">
         <div class="container">
-            <div class="row align-items-end">
+            <div class="row align-items-center">
                 <div class="col-12 col-md-5 col-lg-4">
                     <div class="featured-artist-thumb">
                         <img src="{{ $new_track->album->images[0]->url }}" alt="">
+                        <!-- Play Icon -->
+                        <div class="play-icon">
+                            <a href="{{ $new_track->preview_url }}" class="video--play--btn">
+                                <span class="icon-play-button"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-7 col-lg-8">
@@ -163,12 +169,19 @@
                         </div>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <a href="{{ url('/player?track='.urlencode($new_track->name.' '.$new_track->artists[0]->name)) }}"
-                                    class="text-white-50">
-                                    {{ $new_track->name }} - {{ $new_track->artists[0]->name }}
-                                </a>
+                                <span>
+                                    <a href="{{ url('/player?track='.urlencode($new_track->name.' '.$new_track->artists[0]->name)) }}"
+                                           class="text-white-50">
+                                        {{ $new_track->name }}
+                                    </a>
+                                </span>
+                                <span class="text-white-50"> - </span>
+                                <span>
+                                    <a href="{{ url('/artist/'.$new_track->artists[0]->id) }}" class="text-white-50">
+                                        {{ $new_track->artists[0]->name }}
+                                    </a>
+                                </span>
                             </div>
-                            <iframe src="{{ $new_track->preview_url }}" frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
