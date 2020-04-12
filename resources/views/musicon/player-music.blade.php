@@ -64,126 +64,56 @@
     </div>
     <!-- ##### Featured Artist Area End ##### -->
 
-    <section class="section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="comments">
-                        <div class="comments-details">
-                            <span class="total-comments comments-sort">117 Comments</span>
-                        </div>
-                        @if(Auth::check())
-                            <div class="comment-box add-comment">
-                                <span class="commenter-name">
-                                    <input type="text" placeholder="Add a public comment" name="Add Comment">
-                                    <button type="submit" class="btn btn-dark">Comment</button>
-                                    <button type="cancel" class="btn btn-default">Cancel</button>
-                                </span>
-                            </div>
-                        @else
-                            <div class="text-center mb-4">
-                                <a href="{{ url('/sign-in') }}">Sign in</a> or
-                                <a href="{{ url('/sign-up') }}">Sign up</a> to leave a comment
-                            </div>
-                        @endif
-                        <div class="comment-box">
-                            <span class="commenter-name">
-                                <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
-                            </span>
-                            <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-                            <div class="comment-meta">
-                                <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                            </div>
-                            <div class="comment-box add-comment reply-box">
-                                <span class="commenter-pic">
-                                    <img src="/images/user-icon.jpg" class="img-fluid">
-                                </span>
-                                <span class="commenter-name">
-                                    <input type="text" placeholder="Add a public reply" name="Add Comment">
-                                    <button type="submit" class="btn btn-default">Reply</button>
-                                    <button type="cancel" class="btn btn-default reply-popup">Cancel</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="comment-box">
-                            <span class="commenter-name">
-                                <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
-                            </span>
-                            <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-                            <div class="comment-meta">
-                                <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                            </div>
-                            <div class="comment-box replied">
-                                <span class="commenter-name">
-                                    <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
-                                </span>
-                                <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-                                <div class="comment-meta">
-                                    <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                                </div>
-                                <div class="comment-box replied">
-                                    <span class="commenter-name">
-                                        <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
-                                    </span>
-                                    <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-                                    <div class="comment-meta">
-                                        <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
+    @if(sizeof($same_genre) > 0)
+        <section class="latest-albums-area bg-dark" style="margin-bottom: 50px">
+            <div class="container p-5">
+                <div class="row">
+                    <h1 style="color:#fff;">Same Genre</h1>
+                    <div class="col-12">
+                        <div class="albums-slideshow owl-carousel">
+                            @foreach($same_genre as $track)
+                                <!-- Single Album -->
+                                <div class="single-album">
+                                    <img src="{{ $track->album->images[0]->url }}" alt="">
+                                    <div class="album-info">
+                                        <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                            <h5>{{ $track->name }}</h5>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <section class="latest-albums-area bg-dark" style="margin-bottom: 50px">
-        <div class="container p-5">
-            <div class="row">
-                <h1 style="color:#fff;">Same Genre</h1>
-                <div class="col-12">
-                    <div class="albums-slideshow owl-carousel">
-                        @foreach($same_genre as $track)
-                            <!-- Single Album -->
-                            <div class="single-album">
-                                <img src="{{ $track->album->images[0]->url }}" alt="">
-                                <div class="album-info">
-                                    <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
-                                        <h5>{{ $track->name }}</h5>
-                                    </a>
+    @if(sizeof($same_artist) > 0)
+        <section class="latest-albums-area" style="margin-bottom: 50px">
+            <div class="container p-5">
+                <div class="row">
+                    <h1>Same Artist</h1>
+                    <div class="col-12">
+                        <div class="albums-slideshow owl-carousel">
+                            @foreach($same_artist as $track)
+                                <!-- Single Album -->
+                                <div class="single-album">
+                                    <img src="{{ $track->album->images[0]->url }}" alt="">
+                                    <div class="album-info">
+                                        <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                            <h5>{{ $track->name }}</h5>
+                                        </a>
+                                        <p>{{ $track->artists[0]->name }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="latest-albums-area" style="margin-bottom: 50px">
-        <div class="container p-5">
-            <div class="row">
-                <h1>Same Artist</h1>
-                <div class="col-12">
-                    <div class="albums-slideshow owl-carousel">
-                        @foreach($same_artist as $track)
-                            <!-- Single Album -->
-                            <div class="single-album">
-                                <img src="{{ $track->album->images[0]->url }}" alt="">
-                                <div class="album-info">
-                                    <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
-                                        <h5>{{ $track->name }}</h5>
-                                    </a>
-                                    <p>{{ $track->artists[0]->name }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <section id="genius-lyrics" class="d-none">
         {!! $lyrics !!}

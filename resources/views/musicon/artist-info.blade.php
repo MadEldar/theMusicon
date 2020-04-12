@@ -54,53 +54,56 @@
     </div>
     <!-- ##### Featured Artist Area End ##### -->
 
-    <section class="latest-albums-area" style="margin-bottom: 50px">
-        <div class="container p-5">
-            <div class="row">
-                <h1>Top tracks</h1>
-                <div class="col-12">
-                    <div class="albums-slideshow owl-carousel">
-                        @foreach($tracks as $track)
-                            <!-- Single Album -->
-                            <div class="single-album">
-                                <img src="{{ $track->album->images[1]->url }}" alt="">
-                                <div class="album-info">
-                                    <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
-                                        <h5>{{ $track->name }}</h5>
-                                    </a>
-                                    <p>{{ $track->album->name }}</p>
+    @if(sizeof($tracks) > 0)
+        <section class="latest-albums-area" style="margin-bottom: 50px">
+            <div class="container p-5">
+                <div class="row">
+                    <h1>Top tracks</h1>
+                    <div class="col-12">
+                        <div class="albums-slideshow owl-carousel">
+                            @foreach($tracks as $track)
+                                <!-- Single Album -->
+                                <div class="single-album">
+                                    <img src="{{ $track->album->images[1]->url }}" alt="">
+                                    <div class="album-info">
+                                        <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
+                                            <h5>{{ $track->name }}</h5>
+                                        </a>
+                                        <p>{{ $track->album->name }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <section class="latest-albums-area bg-dark">
-        <div class="container p-5">
-            <div class="row">
-                <h1 class="text-white">All albums</h1>
-                <div class="col-12">
-                    <div class="albums-slideshow owl-carousel">
-                        @foreach($albums as $album)
-                            <!-- Single Album -->
-                            <div class="single-album">
-                                <img src="{{ $album->images[1]->url }}" alt="">
-                                <div class="album-info">
-                                    <a href="{{ url("/album?q=$album->id") }}">
-                                        <h5 class="text-white">{{ $album->name }}</h5>
-                                    </a>
+    @if(sizeof($albums) > 0)
+        <section class="latest-albums-area bg-dark">
+            <div class="container p-5">
+                <div class="row">
+                    <h1 class="text-white">All albums</h1>
+                    <div class="col-12">
+                        <div class="albums-slideshow owl-carousel">
+                            @foreach($albums as $album)
+                                <!-- Single Album -->
+                                <div class="single-album">
+                                    <img src="{{ $album->images[1]->url }}" alt="">
+                                    <div class="album-info">
+                                        <a href="{{ url("/album?q=$album->id") }}">
+                                            <h5 class="text-white">{{ $album->name }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endif
     <!-- ##### Contact Area Start ##### -->
     @include('musicon/partials/contact')
     <!-- ##### Contact Area End ##### -->
