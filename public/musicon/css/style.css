@@ -934,7 +934,7 @@ img {
 .song-lyrics-area img{
     border: 2px solid #23AF92;
     border-radius: 10px;
-    margin: -22px 0px 0px 20px
+    margin: -22px 0px 0px 0px
 }
 
 .song-lyrics-area .oneMusic-btn-player {

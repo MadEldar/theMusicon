@@ -34,7 +34,8 @@
                         <a style="font-weight: normal;margin-right: 0.5rem" href="{{ url('/albums?q='.$val) }}" data-filter=".{{$val}}" @if($_GET['q'] == $val && $_GET['q'] != 0) class="active" @endif>{{$val}}</a>
                         @endforeach
                         <span class="pr-2">or</span>
-                        <input type="text" class="form-control w-25 float-right pl-2" name="q">
+                        <input type="text" placeholder="Search here" class="form-control w-25 float-right pl-2" name="q" style="margin-right: 0.5rem; margin-top: 0.5rem">
+                        <button type="submit" class="mt-2"  style="background: none; border: 2px solid black"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
             </div>

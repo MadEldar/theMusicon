@@ -47,7 +47,6 @@
                                 </li>
                                 <li><a href="{{url('/artists')}}">Artists</a></li>
                                 <li><a href="{{url('/albums')}}">Albums</a></li>
-                                <li><a href="{{url('/news')}}">News</a></li>
                                 <li><a href="{{url('/events')}}">Events</a></li>
                                 <li><a href="{{url('/contacts')}}">Contact</a></li>
                                 @if(Auth::check() && Auth::user()->user_role == 0)

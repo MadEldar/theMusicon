@@ -37,7 +37,10 @@
                                 <a href="#" class="event-place">VIP Sala</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -54,7 +57,9 @@
                                 <a href="#" class="event-place">Gold Arena</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +76,9 @@
                                 <a href="#" class="event-place">Space Ibiza</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -88,7 +95,9 @@
                                 <a href="#" class="event-place">VIP Sala</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -105,7 +114,9 @@
                                 <a href="#" class="event-place">Gold Arena</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +133,9 @@
                                 <a href="#" class="event-place">Space Ibiza</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -139,7 +152,9 @@
                                 <a href="#" class="event-place">VIP Sala</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -156,7 +171,9 @@
                                 <a href="#" class="event-place">Gold Arena</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -173,7 +190,9 @@
                                 <a href="#" class="event-place">Space Ibiza</a>
                                 <a href="#" class="event-date">June 15, 2018</a>
                             </div>
-                            <a href="#" class="btn see-more-btn">See Event</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event" style="background: none">
+                                <a  href="#" class="btn see-more-btn">See Event</a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -250,6 +269,25 @@
     </section>
     <!-- ##### Newsletter & Testimonials Area End ##### -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Events</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Comming Soon...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
       <!-- ##### Contact Area Start ##### -->
     @include('musicon/partials/contact')
     <!-- ##### Contact Area End ##### -->
