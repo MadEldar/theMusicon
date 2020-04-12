@@ -191,6 +191,7 @@ class WebController extends Controller
     public function sign_in(SignInRequest $req) {
         $req->validate([]);
         $user = User::where('user_email', $req->get('user_email'))->first();
+        if ($user->password != $req->get('password')) return redirect('/sign-in')->withErrors(['Incorrect password']);
         Auth::login($user);
         return redirect('/')->with('message', [
             'type' => 'success',
