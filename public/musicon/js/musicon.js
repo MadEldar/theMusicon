@@ -7,7 +7,7 @@ function getAccessToken() {
             _token: $('input[name="_token"]').val(),
         },
         async: false,
-        success: function(data) {
+        success: data => {
             token = data;
         }
     });
@@ -46,11 +46,10 @@ $('.load-more-btn').on('click', 'button', function () {
         type: 'post',
         data: {
             q: new URLSearchParams(window.location.search).get('q') ?? 'all',
-            offset: offset + 18,
+            offset: offset + 24,
             _token: $('input[name="_token"]').val()
         },
-        success: function(data) {
-            console.log(data);
+        success: data => {
             data.forEach((datum) => {
                 $('.oneMusic-albums').append(`
                     <!-- Single Album -->
@@ -66,10 +65,16 @@ $('.load-more-btn').on('click', 'button', function () {
                                         : asset_path('/musicon/img/bg-img/artist-default.png')
                             }" alt="">
                             <div class="album-info">
-                                <a href="#">
+                                <a href="${
+                                    datum.album ?
+                                        '/player?track=' + encodeURI(datum.name + 'by' + datum.artists[0].name) :
+                                        datum.artists ?
+                                            '/album?q=' + datum.id :
+                                            '/artist/' + datum.id
+                                }">
                                     <h5>${ datum.name }</h5>
                                 </a>
-                                ${ datum.artists ? '<p>'+datum.artists[0].name+'</p>':'' }
+                                ${ datum.artists ? '<a href="/artist/' + datum.artists[0].id + '"><p>'+datum.artists[0].name+'</p></a>':'' }
                             </div>
                         </div>
                     </div>
@@ -82,4 +87,39 @@ $('.load-more-btn').on('click', 'button', function () {
             }
         }
     });
+});
+
+$('#more-lyrics').on('click', function() {
+    let index = parseInt($(this).attr('data-index'));
+    $(this).attr('data-index', index + 1);
+    $.ajax({
+        url: '/more-lyrics',
+        method: 'post',
+        data: {
+            track: $('.breadcrumb-area h2').text(),
+            artist: $('.song-lyrics-area h5 a').text(),
+            _token: $('input[name="_token"]').val(),
+            index: index
+        },
+        success: lyrics => {
+            $('#genius-lyrics').html(lyrics);
+            $.get($('#genius-lyrics script').attr('src'), script => {
+                let filtered = script
+                    .replace(/\\\'/g, "'")
+                    .replace(/\\\\/g, "\\")
+                    .replace(/\\\\/g, "")
+                    .replace(/\\\//g, "/")
+                    .replace(/\\\"/g, '"');
+                let start = filtered.indexOf('\\n\\n') + 4,
+                    end = filtered.indexOf('</iframe>') + 9;
+                $('#genius-lyrics').html(filtered.substring(start, end).replace(/\\n/g, ''));
+                $('.song-lyrics-area pre').html(
+                    $('.rg_embed_body p').text() != '' ?
+                        $('.rg_embed_body p').html() :
+                        'There is no lyric for this song.'
+                );
+            }, 'text');
+        },
+        error: err => {console.log(err);}
+    })
 });

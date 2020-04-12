@@ -47,19 +47,11 @@ class Spotify
             '4bCuBkeVRofawnFkGu05fu'
         ],
         'genres' => [
-            'acoustic',
-            'alt-rock',
             'alternative',
-            'children',
             'classical',
-            'club',
             'country',
-            'dance',
-            'disco',
             'disney',
-            'dubstep',
             'edm',
-            'electro',
             'electronic',
             'hard-rock',
             'heavy-metal',
@@ -68,7 +60,6 @@ class Spotify
             'indie-pop',
             'k-pop',
             'pop',
-            'r-n-b',
             'rock',
             'rock-n-roll',
         ]
@@ -109,10 +100,8 @@ class Spotify
 
         $options = [
             CURLOPT_URL => "https://accounts.spotify.com/authorize?".http_build_query($query),
-            CURLOPT_FOLLOWLOCATION => true,   // follow redirects
-//            CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode($client_id . ':' . $client_secret)],
+            CURLOPT_FOLLOWLOCATION => true,
         ];
-//        dd($options);
         $ch = curl_init();
         curl_setopt_array($ch, $options);
         return curl_exec($ch);
@@ -141,7 +130,7 @@ class Spotify
      * @param null $access_token
      * @return mixed
      */
-    public static function search($q, $type, $limit = 10, $offset = 0, $access_token = null) {
+    public static function search($q, $type = null, $limit = 10, $offset = 0, $access_token = null) {
         $query = http_build_query([
             'q' => $q,
             'type' => $type ?? implode(',', Spotify::search_types),
@@ -164,7 +153,7 @@ class Spotify
             'market' => 'US',
             "seed_$type" => implode(',', self::seeds[$type]),
         ]);
-        $url = "https://api.spotify.com/v1/recommendations?$query&min_energy=0.4&min_popularity=50";
+        $url = "https://api.spotify.com/v1/recommendations?$query&min_energy=0.6&min_popularity=50";
 
         return self::m_curl_exec($url, $access_token);
     }
@@ -190,9 +179,7 @@ class Spotify
     }
 
     public static function new_releases($limit = 10, $offset = 0, $access_token = null) {
-        $url = "https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit";
-
-        return self::m_curl_exec($url, $access_token);
+        return self::m_curl_exec("https://api.spotify.com/v1/browse/new-releases?offset=$offset&limit=$limit", $access_token);
     }
 
     public static function find_artist($id, $access_token = null) {
@@ -212,9 +199,7 @@ class Spotify
     }
 
     public static function find_track($id, $rand = false, $access_token = null) {
-        $url = "https://api.spotify.com/v1/tracks/".
-            ($rand?self::seeds['tracks'][array_rand(self::seeds['tracks'])]:$id);
-
+        $url = "https://api.spotify.com/v1/tracks/".($rand?self::seeds['tracks'][array_rand(self::seeds['tracks'])]:$id);
         return self::m_curl_exec($url, $access_token);
     }
 }

@@ -26,13 +26,15 @@
             <div class="row">
                 <div class="col-12">
                     <form action="{{ url('/artists') }}" method="get" class="browse-by-categories category-menu d-flex flex-wrap align-items-center mb-70">
-                        <button type="submit" name="q" value="All" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</button>
+                        <a style="font-weight: normal;margin-right: 0.5rem" href="{{ url('/albums?q=all') }}" data-filter="*" @if($_GET['q'] == 'all') class="active" @endif>Browse All</a>
                         @foreach(range('A', 'Z') as $val)
-                        <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</button>
+                        <a style="font-weight: normal;margin-right: 0.5rem" href="{{ url('/albums?q='.$val) }}" data-filter=".{{$val}}" @if($_GET['q'] == $val) class="active" @endif>{{$val}}</a>
                         @endforeach
                         @foreach(range('0', '9') as $val)
-                        <button type="submit" name="q" value="{{$val}}" data-filter=".{{$val}}" @if($_GET['q'] == $val && $_GET['q'] != 0) class="active" @endif>{{$val}}</button>
+                        <a style="font-weight: normal;margin-right: 0.5rem" href="{{ url('/albums?q='.$val) }}" data-filter=".{{$val}}" @if($_GET['q'] == $val && $_GET['q'] != 0) class="active" @endif>{{$val}}</a>
                         @endforeach
+                        <span class="pr-2">or</span>
+                        <input type="text" class="form-control w-25 float-right pl-2" name="q">
                     </form>
                 </div>
             </div>
@@ -43,7 +45,7 @@
                         <div class="single-album">
                             <img src="{{ isset($artist->images[1]) ? $artist->images[1]->url : asset('/musicon/img/bg-img/artist-default.png')}}" alt="">
                             <div class="album-info">
-                                <a href="#">
+                                <a href="{{ url('/artist/'.$artist->id) }}">
                                     <h5>{{ $artist->name }}</h5>
                                 </a>
                             </div>
@@ -70,20 +72,6 @@
         </div>
     </div>
     <!-- ##### Load More Area End ##### -->
-
-    <!-- ##### Add Area Start ##### -->
-    <div class="add-area mb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="adds">
-                        <a href="#"><img src="{{asset('musicon/img/bg-img/add3.gif')}}" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Add Area End ##### -->
 
     <!-- ##### Contact Area Start ##### -->
       @include('musicon/partials/contact')

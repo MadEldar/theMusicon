@@ -42,7 +42,7 @@
                                         <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
                                             <h5>{{ $track->name }}</h5>
                                         </a>
-                                        <p>{{ $track->artists[0]->name }}</p>
+                                        <a href="{{ url('/artist/'.$track->artists[0]->id) }}"><p>{{ $track->artists[0]->name }}</p></a>
                                     </div>
                                 </div>
                             </div>

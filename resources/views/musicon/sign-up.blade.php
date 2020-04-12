@@ -34,26 +34,26 @@
                                 <div class="form-group">
                                     <label for="emailField">Email address</label>
                                     <input type="email" name="user_email" class="form-control" id="emailField"
-                                           aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('user_email') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('user_email') }}" required>
                                     <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group col-6 pl-0 float-left">
                                     <label for="firstNameField">First name</label>
                                     <input type="text" name="first_name" class="form-control" id="firstNameField"
-                                           aria-describedby="emailHelp" placeholder="Enter first name" value="{{ old('first_name') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter first name" value="{{ old('first_name') }}" required>
                                 </div>
                                 <div class="form-group col-6 pr-0 float-left">
                                     <label for="lastNameField">Last name</label>
                                     <input type="text" name="last_name" class="form-control" id="lastNameField"
-                                           aria-describedby="emailHelp" placeholder="Enter last name" value="{{ old('last_name') }}">
+                                           aria-describedby="emailHelp" placeholder="Enter last name" value="{{ old('last_name') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="passwordField">Password</label>
-                                    <input type="password" name="password" class="form-control" id="passwordField" placeholder="Password">
+                                    <input type="password" name="password" class="form-control" id="passwordField" placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmField">Confirm password</label>
-                                    <input type="password" name="confirm" class="form-control" id="confirmField" placeholder="Confirm password">
+                                    <input type="password" name="confirm" class="form-control" id="confirmField" placeholder="Confirm password" required>
                                 </div>
                                 <button type="submit" class="btn oneMusic-btn mt-30">Sign up</button>
                             </form>

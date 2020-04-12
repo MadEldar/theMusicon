@@ -2,7 +2,7 @@
     <!-- Navbar Area -->
     <div class="oneMusic-main-menu">
         <div class="classy-nav-container breakpoint-off">
-            <div class="container">
+            <div class="col-10 offset-1">
                 <!-- Menu -->
                 <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
@@ -13,6 +13,15 @@
                             The Musicon
                         </a>
                     </div>
+
+                    <!-- Search form -->
+                    <form action="{{ url('/search') }}" method="get"
+                        class="form-inline d-flex justify-content-center md-form form-sm active-green active-green-2 mt-2">
+                        <input class="form-control form-control-sm ml-3" name="q" style="width: 350px"
+                                type="text" placeholder="Search" aria-label="Search" required>
+                        <button type="submit" class="ml-3"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
                         <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -20,7 +29,6 @@
 
                     <!-- Menu -->
                     <div class="classy-menu">
-
                         <!-- Close Button -->
                         <div class="classycloseIcon">
                             <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
@@ -42,26 +50,9 @@
                                 <li><a href="{{url('/news')}}">News</a></li>
                                 <li><a href="{{url('/events')}}">Events</a></li>
                                 <li><a href="{{url('/contacts')}}">Contact</a></li>
-                                <li><a href="{{url('/pages')}}">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{url('/')}}">Home</a></li>
-                                        <li><a href="{{url('/albums')}}">Albums</a></li>
-                                        <li><a href="{{url('/artists')}}">Artist</a></li>
-                                        <li><a href="{{url('/events')}}">Events</a></li>
-                                        <li><a href="{{url('/news')}}">News</a></li>
-                                        <li><a href="{{url('/contacts')}}">Contact</a></li>
-                                        <li><a href="{{url('/elements')}}">Elements</a></li>
-                                        <li><a href="{{url('/information')}}" style="color: #23AF92">Information</a>
-                                        </li>
-                                        @if(!Auth::check())
-                                            <li><a href="{{url('/sign-in')}}" style="color: #23AF92">Sign in</a></li>
-                                            <li><a href="{{url('/sign-up')}}" style="color: #23AF92">Sign up</a></li>
-                                        @elseif(Auth::user()->user_role == 0)
-                                            <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </li>
+                                @if(Auth::check() && Auth::user()->user_role == 0)
+                                    <li><a href="{{url('/administrator')}}" style="color: #23AF92">musiconMyAdmin</a></li>
+                                @endif
                             </ul>
 
                             <!-- Login/Register & Cart Button -->

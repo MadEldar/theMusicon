@@ -85,7 +85,9 @@
                                 <a href="{{ url("/album?q=$album->id") }}">
                                     <h5>{{ $album->name }}</h5>
                                 </a>
-                                <p>{{ $album->artists[0]->name }}</p>
+                                <a href="{{ url('/artist/'.$album->artists[0]->id) }}">
+                                    <p>{{ $album->artists[0]->name }}</p>
+                                </a>
                             </div>
                         </div>
                         @endforeach
@@ -131,18 +133,13 @@
                                 <a href="{{ url('/player?track='. urlencode($track->name.' '.$track->artists[0]->name)) }}">
                                     <h5>{{ $track->name }}</h5>
                                 </a>
-                                <p>{{ $track->artists[0]->name }}</p>
+                                <a href="{{ url('/artist/'.$track->artists[0]->id) }}">
+                                    <p>{{ $track->artists[0]->name }}</p>
+                                </a>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn text-center wow fadeInUp" data-wow-delay="300ms">
-                        <a href="#" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -198,7 +195,9 @@
                                 </div>
                                 <div class="content-">
                                     <h6><a href="{{ url("/album?q=$album->id") }}">{{ $album->name }}</a></h6>
-                                    <p>{{ $album->artists[0]->name }}</p>
+                                    <a href="{{ url('/artist/'.$album->artists[0]->id) }}">
+                                        <p>{{ $album->artists[0]->name }}</p>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -224,7 +223,9 @@
                                                 {{ $track->name }}
                                             </a>
                                         </h6>
-                                        <p>{{ $track->artists[0]->name }}</p>
+                                        <a href="{{ url('/artist/'.$track->artists[0]->id) }}">
+                                            <p>{{ $track->artists[0]->name }}</p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +268,4 @@
     <!-- ##### All Javascript Script ##### -->
     @include('musicon/partials/scripts')
 </body>
-<script>
-
-</script>
 </html>

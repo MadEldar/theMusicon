@@ -22,11 +22,12 @@
 
     <!-- ##### Featured Artist Area Start ##### -->
     <div class="section-padding-100-0">
-        <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image:url('{{ $artistS->images[0]->url }}'); background-position: center">
+        <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed"
+                 style="background-image:url('{{ $artistS->images[0]->url }}');background-position:center;">
             <div class="container">
                 <div class="col-lg-12 col-md-6 col-sm-8" style="">
                     <div class="featured-artist-content">
-                        <div class="song-lyrics-area bg-white" id="lyrics-area">
+                        <div class="song-lyrics-area bg-white" id="lyrics-area" style="min-height: 400px">
                             <div class="col-3" style="float: right">
                                 <img src="{{ $artistS->images[0]->url }}" alt="" width="200px" height="300px">
                                 <h3>{{ $artistS->name }}</h3>
@@ -34,14 +35,14 @@
                                 <h5 style="font-weight: normal">Popularity: {{ $artistS->popularity }}</h5>
                                 <h5 style="font-weight: normal">Genre:</h5>
                                 @forelse($genres as $genre)
-                                    <a href="{{ url("/genres?q=$genre") }}">{{ ucfirst($genre) }}</a>
+                                    <a class="pr-2" href="{{ url("/genres?q=$genre") }}">{{ ucfirst($genre) }}</a>
                                 @empty
                                     <span>No genre</span>
                                 @endforelse
                             </div>
                             <div class="col-9 p-5" data-wow-delay="300ms" style="float: left; margin: -24px 0px">
                                 <span style="white-space: pre-line">
-                                    {!! $artistL->bio->content !!}
+                                    {!! $artistL->bio->content ?? '<p>Cannot find artist\'s bio' !!}
                                 </span>
                             </div>
                         </div>

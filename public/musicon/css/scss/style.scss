@@ -982,10 +982,6 @@ img {
         &.active {
             border: 2px solid $dark-color;
         }
-        &:first-child {
-            border-color: transparent;
-            background-color: transparent;
-        }
     }
 }
 

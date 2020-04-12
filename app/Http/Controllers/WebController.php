@@ -72,7 +72,8 @@ class WebController extends Controller
     }
     public function artist($id) {
         $artistS = Spotify::find_artist($id);
-        $artistL = LastFM::find_artist($artistS->name)->artist;
+        $artistL = LastFM::find_artist($artistS->name);
+        $artistL = isset($artistL->error) ? null : $artistL->artist;
         $tracks = Spotify::find_artist_track($id)->tracks;
         $albums = Spotify::find_artist_album($id)->items;
         $unique = array_unique(array_map(fn($album) => $album->name, $albums));
@@ -85,7 +86,7 @@ class WebController extends Controller
             'artistL' => $artistL,
             'tracks' => $tracks,
             'albums' => $albums,
-            'genres' => array_intersect($artistS->genres, Spotify::seeds['genres'])
+            'genres' => array_intersect($artistS->genres, Spotify::get_all_genres()->genres)
         ]);
     }
     public function more_artists(Request $req) {
@@ -121,18 +122,45 @@ class WebController extends Controller
         return redirect('/player?track='.urlencode($track->name.' '.$track->artists[0]->name));
     }
     public function player() {
-        $query = preg_replace('~-~', '', $_GET['track']);
-        $track = Spotify::search($query, 'track', 1)->tracks->items[0];
+        $from = stripos($_GET['track'], 'from');
+        $query =  $from? substr($_GET['track'], 0, $from) : $_GET['track'];
+        $track = Spotify::search($query, 'track', 1)->tracks->items;
+        if ($track == []) return redirect()->back()->withErrors(['Could find song in the database']);
+        $track = $track[0];
         $artist = Spotify::find_artist($track->artists[0]->id);
-        $lyrics = Genius::find_track(Genius::search($track->name, $track->artists[0]->name)->response->hits[1]->result->id)->response->song->embed_content;
+        $lyrics_search = Genius::search($track->name, $track->artists[0]->name)->response->hits;
+        if ($lyrics_search == []) $lyrics = '';
+        else $lyrics = Genius::find_track($lyrics_search[0]->result->id)->response->song->embed_content;
+        $genres = array_intersect($artist->genres, Spotify::get_all_genres()->genres);
+        $genre = ($genres != []) ? $genres[array_key_first($genres)] : 'None';
+        $same_genre = Spotify::get_genre_tracks($genre)->tracks;
+        $same_artist = Spotify::find_artist_track($artist->id)->tracks;
         return view('musicon/player-music', [
             'title' => "$track->name | The Musicon",
             'track' => $track,
             'lyrics' => $lyrics,
-            'artist' => $artist
+            'artist' => $artist,
+            'genre' =>  $genre,
+            'same_genre' => $same_genre,
+            'same_artist' => $same_artist,
         ]);
     }
+    public function more_lyrics(Request $req) {
+        $lyrics_search = Genius::search($req->get('track'), $req->get('artist'))->response->hits;
+        if ($lyrics_search == []) $lyrics = '';
+        else $lyrics = Genius::find_track($lyrics_search[$req->get('index')]->result->id)->response->song->embed_content;
+        return $lyrics;
+    }
 
+    public function search() {
+        $result = Spotify::search($_GET['q'], null, 12);
+        return view('musicon/search', [
+            'title' => 'Searching for '. $_GET['q'] . ' | The Musicon',
+            'albums' => $result->albums->items,
+            'artists' => $result->artists->items,
+            'tracks' => $result->tracks->items,
+        ]);
+    }
     public function events() {
         return view('musicon/events', [
             'title' => 'Events | The Musicon',
@@ -198,7 +226,10 @@ class WebController extends Controller
 
     public function sign_out() {
         Auth::logout();
-        return redirect()->back();
+        return redirect()->back()->with('message', [
+            'type' => 'success',
+            'content' => 'Signed out successfully',
+        ]);
     }
 
     public function verify($token) {
